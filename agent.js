@@ -34,8 +34,8 @@ var agent = (function() {
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) { options.successCallback(data, options.div); },
-            error: function (err)  { options.errorCallback(data); }
+            success:  function (data) { options.successcall(data, options.div); },
+            error: function (err)  { options.errorcall(data); }
      	});
     }
 
