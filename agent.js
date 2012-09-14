@@ -28,10 +28,10 @@ var agent = {
 		//need to test extensively on IE
 		jQuery.support.cors = true;
         //this.url = 'http://localhost:8080/jsonrpc';
-        this._url = serviceUrl;
-        this._userID = options.userID;
-        this._user_profile = options.profile;
-		this.div = options.div;
+        this._url = serviceUrl.clone();
+        this._userID = options.userID.clone();
+        this._user_profile = options.profile.clone();
+		this.div = options.div.clone();
         console.log(this.div);
         //initialized now subscribe the user to the service and grab recommendations
         this.subscribe();
