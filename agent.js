@@ -26,16 +26,16 @@ var agent = (function() {
     	}
     }
 
-    function _send_request(div, url, method, params, successCallback, errorCallback) {
+    function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
-    	console.log(url);
+    	console.log(options.url);
          $.ajax({
-            url: url, 
-            data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
+            url: options.url, 
+            data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) { successCallback(data, div); },
-            error: function (err)  { errorCallback(data); }
+            success:  function (data) { options.successCallback(data, options.div); },
+            error: function (err)  { options.errorCallback(data); }
      	});
     }
 
@@ -49,15 +49,36 @@ var agent = (function() {
 	}
 
 	function subscribe() {
-		_send_request(this.div, this._url, 'subscribe', [this._userID, this._user_profile], _successCallback, _errorCallback);
+		_send_request({
+			div: this.div, 
+			url: this._url,
+			method: 'subscribe', 
+			params: [this._userID, this._user_profile], 
+			successcall: _successCallback, 
+			errorcall: _errorCallback
+		});
 	}
 
 	function recommendation() {
-		_send_request(this.div, this._url, 'recommendation', [this._userID], _appendRec, _errorCallback);
+		_send_request({	
+			div: this.div, 
+			url: this._url,
+			method: 'recommendation', 
+			params: [this._userID], 
+			successcall: _appendRec, 
+			errorcall: _errorCallback
+		});
 	}
 
 	function rate(indexkey, rating) {
-		_send_request(this.div, this._url, 'rate', [this._userID, indexkey, rating], _successCallback, _errorCallback);
+		_send_request({
+			div: this.div, 
+			url: this._url,
+			method: 'rate', 
+			params: [this._userID, indexkey, rating], 
+			successcall: _appendRec, 
+			errorcall: _errorCallback
+		});
 	}
 
 
