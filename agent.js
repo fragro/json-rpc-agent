@@ -59,7 +59,7 @@ $('#more').click( function() {
 			$(window.curDiv).next().fadeIn();
 			checkLessButton();
 			window.curDiv = '#' + $(window.curDiv).next().attr('id');
-
+		});
 	}
 })
 
