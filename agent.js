@@ -85,7 +85,7 @@ var agent = (function() {
     //successcallback for reccomendation
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
-    		var link = "<h3 id='wait'>Recommendations are being generated. In a moment click 'More Recommendations'</h3>"
+    		$('#wait').html("Recommendations are being generated.<br> In a moment click 'More Recommendations'");
 			$(div).append(link);
     	}
     	else{
@@ -95,11 +95,11 @@ var agent = (function() {
     		window.curDiv = '#recommendation' + window.requestCount;
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
-	    		$('#wait').remove();
+	    		$('#wait').html();
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword = '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
 				var rating = '<div class="star-rate" id="star' + window.urlCount  + '"></div>'
-				var summary = '<div class="summary">' + data.result.results[i].summary + '<br>' + rating + '<br>' + keyword + '</div>'
+				var summary = '<div class="summary">' + data.result.results[i].summary + rating + keyword + '</div>'
 				$('#recommendation' + window.requestCount).append(link);
 				$('#recommendation' + window.requestCount).append(summary);
 				stars('#star' + window.urlCount, data.result.results[i].id);
@@ -172,7 +172,6 @@ var agent = (function() {
 	    init: function (serviceUrl, options) {
 			//we need to support cross-domain requests since this is loaded on nutraspace server.
 			//need to test extensively on IE
-			jQuery.support.cors = true;
 	        //this.url = 'http://localhost:8080/jsonrpc';
 	        this._url = serviceUrl;
 	        this._userID = options.userID;
