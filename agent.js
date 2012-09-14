@@ -70,7 +70,7 @@ var agent = {
 
 	//JQuery UI Functions
 
-	append: function(indexkey, url, summary){
+	_append: function(indexkey, url, summary){
 		var st = '<div class="rec" id="' + indexkey +'"><a href="' + url +'" target="_blank">' + summary + '</a></div>';
 		console.log(this._div);
 		console.log(st);
