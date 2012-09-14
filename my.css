@@ -1,0 +1,12 @@
+a {
+	margin:20px;
+	text-decoration:none;
+	font-family: 'Helvetica';
+	font-size:1.2em;
+	font-weight:bold;
+	color:#3366AC;
+}
+a:visited {
+	color:#4C3BB4;
+}
+h1 {font-family: 'Glass Antiqua', cursive;}
