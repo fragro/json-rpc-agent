@@ -23,7 +23,7 @@ function stars(div, id){
 
 //INTERFACE SCRIPT
 function checkLessButton(){
-	if($(window.curDiv).prev()){
+	if($(window.curDiv).prev().length){
 		$('#less').show();
 	}
 	else{
@@ -32,11 +32,15 @@ function checkLessButton(){
 }
 $('#less').click( function() {
 	//cur div is window.requestCount
-	$(window.curDiv).fadeOut(function(){
-		checkLessButton();
-		$(window.curDiv).prev().fadeIn();
-		window.curDiv = '#' + $(window.curDiv).prev().attr('id');
-	});
+	if($(window.curDiv).prev().length){
+		$(window.curDiv).fadeOut(function(){
+			$(window.curDiv).prev().fadeIn();
+			window.curDiv = '#' + $(window.curDiv).prev().attr('id');
+		});
+	}
+	console.log($(window.curDiv).prev().length);
+	checkLessButton();
+
 })
 $('#more').click( function() {
 	if(requestCount == 0){
