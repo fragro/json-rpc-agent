@@ -13,24 +13,23 @@ var agent = (function() {
 	var _url;
 	var _userID;
 	var _user_profile;
-	var that = this;
 
     //private functions
     //successcallback for reccomendation
-    that.appendRec = function(data){
+    function appendRec(data){
     	for(var i in data.result.results){
     		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 			console.log(st);
-			console.log(that.div);
-			$(that.div).append(st);
+			console.log(this.div);
+			$(this.div).append(st);
     	}
     }
 
-    that._send_request = function(method, params, successCallback, errorCallback) {
+    function _send_request(method, params, successCallback, errorCallback) {
     	var randomID=Math.floor(Math.random()*11100)
-    	console.log(that);
+    	console.log(this);
          $.ajax({
-            url: that._url, 
+            url: this._url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
@@ -39,26 +38,28 @@ var agent = (function() {
      	});
     }
     //test callback functions for debugging
-	that._successCallback = function(data) {
+	function _successCallback(data) {
 		console.log(JSON.stringify(data));
 	}
-	that._errorCallback = function(err) {
+	function _errorCallback(err) {
 		console.log(JSON.stringify(err));
 	}
+	function subscribe() {
+		_send_request('subscribe', [this._userID, this._user_profile], this._successCallback, this._errorCallback);
+	},
+
+	function recommendation() {
+		_send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
+	},
 
 
 	return {
 		//public functions
-		subscribe: function() {
-			_send_request('subscribe', [that._userID, that._user_profile], that._successCallback, that._errorCallback);
-		},
-
-		recommendation: function() {
-			_send_request('recommendation', [that._userID], that._appendRec, that._errorCallback);
-		},
+		subscribe: subscribe,
+		recommendation: recommendation,
 
 		rate: function(indexkey, rating) {
-			_send_request('rate', [that._userID, indexkey, rating], that._successCallback, that._errorCallback);
+			_send_request('rate', [this._userID, indexkey, rating], this._successCallback, this._errorCallback);
 		},
 
 	    init: function (serviceUrl, options) {
@@ -66,14 +67,14 @@ var agent = (function() {
 			//need to test extensively on IE
 			jQuery.support.cors = true;
 	        //this.url = 'http://localhost:8080/jsonrpc';
-	        that._url = serviceUrl;
-	        that._userID = options.userID;
-	        that._user_profile = options.profile;
-			that.div = options.div;
-	        console.log(that);
+	        this._url = serviceUrl;
+	        this._userID = options.userID;
+	        this._user_profile = options.profile;
+			this.div = options.div;
+	        console.log(this);
 	        //initialized now subscribe the user to the service and grab recommendations
-	        subscribe.call(that);
-	        recommendation.call(that);
+	        subscribe.call(this);
+	        recommendation.call(this);
 	    },
 	}
 })();
