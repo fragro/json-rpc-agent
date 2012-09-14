@@ -41,7 +41,9 @@ var agent = {
 
     //successcallback for reccomendation
     _appendRec: function(data){
-    	this._UI.append(data.result);
+    	for(var i in data.results){
+    		this._UI.append(i.indexkey, i.links.fields.url, i.links.fields.title);
+    	}
     },
 
     _send_request: function (method, params, successCallback, errorCallback) {
@@ -75,8 +77,8 @@ var agentUI = {
 		this._div = options.div;
 	},
 
-	append: function(url_info){
-		this._div.append('<div class="rec" id="' + urlinfo.indexkey +'"><a href="' + url_info.url +'" target="_blank">' + url_info.summary + '</a></div>')
+	append: function(indexkey, url, summary){
+		this._div.append('<div class="rec" id="' + indexkey +'"><a href="' + url +'" target="_blank">' + summary + '</a></div>')
 	},
 
 }
