@@ -5,6 +5,9 @@
 * agent, sending back ratings or other types of feedback which in turn drives a collaborative filtering process.
 */
 
+window.requestCount = 0;
+
+
 function stars(div){
 	$(div).raty({
 	  path: '',
@@ -18,7 +21,6 @@ function stars(div){
 
 var agent = (function() {
 	var version = "0.1.0.1";
-	var requestCount = 0;
 	var debug =  true;
 	var div = '#recommendation';
 	var _url;
@@ -38,19 +40,19 @@ var agent = (function() {
 	    		$('#wait').remove();
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword =  '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
-				var rating =  '<div id="star' + requestCount  + '"></div>'
+				var rating =  '<div id="star' + window.requestCount  + '"></div>'
 				alert(rating);
 				var summary = '<div class="summary">' + data.result.results[i].summary + '<br>' + rating + '<br>' + keyword + '</div>'
 				$(div).append(link);
 				$(div).append(summary);
-				stars('star' + requestCount);
+				stars('#star' + requestCount);
 	    	}
 	    }
     }
 
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
-    	this.requestCount += 1;
+    	window.requestCount += 1;
     	console.log(options.url);
     	$('#loading').show();
          $.ajax({
