@@ -15,7 +15,7 @@ var agent = {
 	},
 
 	recommendation: function() {
-		this._send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
+		this._send_request('recommendation', [this._userID], this._successCallback, this._errorCallback);
 	},
 
 	rate: function(indexkey, rating) {
@@ -32,7 +32,7 @@ var agent = {
         this._user_profile = options.profile;
         this.subscribe();
         this._UI = agentUI.init( {
-        	div: options.div;
+        	div: options.div,
         });
         this.recommendation();
     },
@@ -72,10 +72,10 @@ var agentUI = {
 
 	init: function(options){
 		this._div = options.div;
-	}
+	},
 
 	append: function(url_info){
 		this._div.append('<div class="rec" id="' + urlinfo.indexkey +'"><a href="' + url_info.url +'" target="_blank">' + url_info.summary + '</a></div>')
-	}
+	},
 
 }
