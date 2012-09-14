@@ -85,7 +85,7 @@ var agent = (function() {
     //successcallback for reccomendation
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
-    		var link = "<h2 id='wait'>Recommendations are being generated. In a moment click 'More Recommendations'</h2>"
+    		var link = "<h3 id='wait'>Recommendations are being generated. In a moment click 'More Recommendations'</h3>"
 			$(div).append(link);
     	}
     	else{
@@ -158,7 +158,7 @@ var agent = (function() {
 			url: this._url,
 			method: 'rate', 
 			params: [this._userID, indexkey, rating], 
-			successcall: _appendRec, 
+			successcall: _successCallback, 
 			errorcall: _errorCallback
 		});
 	}
