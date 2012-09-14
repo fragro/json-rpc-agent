@@ -15,7 +15,7 @@ var agent = {
 	},
 
 	recommendation: function() {
-		this._send_request('recommendation', [this._userID], this._successCallback, this._errorCallback);
+		this._send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
 	},
 
 	rate: function(indexkey, rating) {
