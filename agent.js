@@ -16,7 +16,7 @@ function stars(div, id){
 	  starOn: 'https://raw.github.com/wbotelhos/raty/master/img/star-on.png',
 	  starOff: 'https://raw.github.com/wbotelhos/raty/master/img/star-off.png',
 	  click: function() {
-	    alert($(div).raty('score') + $('#' + id).html());
+	    alert($(div).raty('score') + $('#' + id).href);
 	  }
 	});
 }
