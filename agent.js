@@ -30,7 +30,8 @@ var agent = {
         this._url = serviceUrl;
         this._userID = options.userID;
         this._user_profile = options.profile;
-		this._div = options.div;
+        console.log(options.div)
+		this.div = options.div;
         //initialized now subscribe the user to the service and grab recommendations
         this.subscribe();
         this.recommendation();
@@ -41,11 +42,10 @@ var agent = {
     //successcallback for reccomendation
     _appendRec: function(data){
     	for(var i in data.result.results){
-	    	console.log();
     		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 			console.log(this._div);
 			console.log(st);
-			this._div.append(st);
+			this.div.append(st);
     	}
     },
 
