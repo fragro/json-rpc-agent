@@ -71,8 +71,8 @@ var agent = (function() {
 			this.div = options.div;
 	        console.log(this);
 	        //initialized now subscribe the user to the service and grab recommendations
-	        subscribe();
-	        recommendation();
+	        subscribe.call(this);
+	        recommendation.call(this);
 	    },
 	}
 })();
