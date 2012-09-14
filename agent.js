@@ -49,15 +49,15 @@ var agent = (function() {
 	}
 
 	function subscribe() {
-		_send_request(this._url, 'subscribe', [this._userID, this._user_profile], this._successCallback, this._errorCallback);
+		_send_request(this._url, 'subscribe', [this._userID, this._user_profile], _successCallback, _errorCallback);
 	}
 
 	function recommendation() {
-		_send_request(this._url, 'recommendation', [this._userID], this._appendRec, this._errorCallback);
+		_send_request(this._url, 'recommendation', [this._userID], _appendRec, _errorCallback);
 	}
 
 	function rate(indexkey, rating) {
-		_send_request(this._url, 'rate', [this._userID, indexkey, rating], this._successCallback, this._errorCallback);
+		_send_request(this._url, 'rate', [this._userID, indexkey, rating], _successCallback, _errorCallback);
 	}
 
 
