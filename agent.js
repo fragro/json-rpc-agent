@@ -39,6 +39,7 @@ var agent = (function() {
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword =  '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
 				var rating =  $('#star').clone().innerHTML;
+				alert(rating);
 				var summary = '<div class="summary">' + data.result.results[i].summary + '<br>' + keyword + '</div>'
 				$(div).append(link);
 				$(div).append(summary);
