@@ -36,13 +36,15 @@ var agent = (function() {
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(options.url);
+    	$('#loading').show();
          $.ajax({
             url: options.url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) {console.log(data); options.successcall(data, options.div); },
-            error: function (err)  { options.errorcall(data); }
+            success:  function (data) {console.log(data); $('#loading').hide(); options.successcall(data, options.div); 
+ },
+            error: function (err)  {$('#loading').hide(); options.errorcall(data); }
      	});
     }
 
