@@ -25,7 +25,7 @@ var agent = (function() {
     	else{
 	    	for(var i in data.result.results){
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
-				var summary = '<span class="summary">' + data.result.results[i].summary + '</span>'
+				var summary = '<div class="summary">' + data.result.results[i].summary + '</div>'
 				$(div).append(link);
 				$(div).append(summary);
 
