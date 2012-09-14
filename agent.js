@@ -42,9 +42,9 @@ var agent = (function() {
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) {console.log(data); $('#loading').hide(); options.successcall(data, options.div); 
+            success:  function (data) {console.log(data);  options.successcall(data, options.div); 
  },
-            error: function (err)  {$('#loading').hide(); options.errorcall(data); }
+            error: function (err)  { options.errorcall(data); }
      	});
     }
 
