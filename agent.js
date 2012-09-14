@@ -31,15 +31,17 @@ function checkLessButton(){
 }
 $('#less').click( function() {
 	//cur div is window.requestCount
-	$('#recommendation' + window.requestCount).fadeOut()
-	window.requestCount -= 1;
-	checkLessButton();
+	$('#recommendation' + window.requestCount).fadeOut(function(){
+		window.requestCount -= 1;
+		checkLessButton();
+		$('#recommendation' + window.requestCount).fadeIn();
+	});
 })
 $('#more').click( function() {
-	$('#recommendation' + window.requestCount).fadeOut()
-	agent.recommendation();
-	checkLessButton();
-
+	$('#recommendation' + window.requestCount).fadeOut( function() {
+		agent.recommendation();
+		checkLessButton();
+	});
 })
 
 var agent = (function() {
