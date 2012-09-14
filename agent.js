@@ -32,7 +32,7 @@ var agent = {
         this._userID = options.userID;
         this._user_profile = options.profile;
 		this.div = options.div;
-        console.log(othis.div);
+        console.log(this.div);
         //initialized now subscribe the user to the service and grab recommendations
         this.subscribe();
         this.recommendation();
