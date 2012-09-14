@@ -7,6 +7,7 @@
 
 window.urlCount = 0;
 window.requestCount = 0;
+window.curDiv = '';
 
 
 function stars(div, id){
@@ -22,7 +23,7 @@ function stars(div, id){
 
 //INTERFACE SCRIPT
 function checkLessButton(){
-	if(window.requestCount == 1){
+	if($(window.curDiv).prev().isEmptyObject()){
 		$('#less').hide();
 	}
 	else{
@@ -31,17 +32,22 @@ function checkLessButton(){
 }
 $('#less').click( function() {
 	//cur div is window.requestCount
-	$('#recommendation' + window.requestCount).fadeOut(function(){
-		window.requestCount -= 1;
+	$(window.curDiv).fadeOut(function(){
 		checkLessButton();
-		$('#recommendation' + window.requestCount).fadeIn();
+		$(window.curDiv).prev().fadeIn();
+		window.curDiv = '#' + $(window.curDiv).prev().attr('id');
 	});
 })
 $('#more').click( function() {
-	$('#recommendation' + window.requestCount).fadeOut( function() {
+	if(requestCount == 0 || $(window.curDiv).next().isEmptyObject()){
 		agent.recommendation();
-		checkLessButton();
-	});
+	}
+	else{
+		$(window.curDiv).fadeOut( function() {
+			$(window.curDiv).next().fadeIn();
+			checkLessButton();
+		});
+	}
 })
 
 var agent = (function() {
@@ -63,10 +69,11 @@ var agent = (function() {
     	else{
 			//log the number of recommendation requests that pass
     		window.requestCount += 1;
+    		$(div).append('<div id="recommendation' + window.requestCount + '"></div>')
+    		window.curDiv = '#recommendation' + window.requestCount;
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
 	    		$('#wait').remove();
-	    		$(div).append('<div id="recommendation' + window.requestCount + '"></div>')
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword = '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
 				var rating = '<div class="star-rate" id="star' + window.urlCount  + '"></div>'
