@@ -78,7 +78,10 @@ var agentUI = {
 	},
 
 	append: function(indexkey, url, summary){
-		this._div.append('<div class="rec" id="' + indexkey +'"><a href="' + url +'" target="_blank">' + summary + '</a></div>')
+		var st = '<div class="rec" id="' + indexkey +'"><a href="' + url +'" target="_blank">' + summary + '</a></div>';
+		console.log(this._div);
+		console.log(st);
+		this._div.append(st);
 	},
 
 }
