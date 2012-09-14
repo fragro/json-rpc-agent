@@ -43,7 +43,7 @@ $('#more').click( function() {
 		agent.recommendation();
 		console.log('no request');
 	}
-	else if($(window.curDiv).next().length){
+	else if($(window.curDiv).next().length == 0){
 		console.log('empty next');
 		$(window.curDiv).fadeOut( function() {
 			agent.recommendation();
