@@ -30,11 +30,12 @@ var agent = {
         this._url = serviceUrl;
         this._userID = options.userID;
         this._user_profile = options.profile;
-        this.subscribe();
         this._UI = agentUI;
         this._UI.init( {
         	div: options.div,
         });
+        //initialized now subscribe the user to the service and grab recommendations
+        this.subscribe();
         this.recommendation();
     },
 
@@ -77,7 +78,6 @@ var agentUI = {
 
 	init: function(options){
 		this._div = options.div;
-		return this
 	},
 
 	append: function(indexkey, url, summary){
