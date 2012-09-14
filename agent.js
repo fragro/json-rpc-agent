@@ -5,17 +5,14 @@
 * agent, sending back ratings or other types of feedback which in turn drives a collaborative filtering process.
 */
 
-function stars(){
-	$('.hover-star').rating({
-		focus: function(value, link){
-			var tip = $('#hover-test');
-			tip[0].data = tip[0].data || tip.html();
-			tip.html(link.title || 'value: '+value);
-		},
-		blur: function(value, link){
-			var tip = $('#hover-test');
-			$('#hover-test').html(tip[0].data || '');
-		}
+function stars(div){
+	$(div).raty({
+	  path: '',
+	  starOn: 'https://raw.github.com/wbotelhos/raty/master/img/star-on.png',
+	  starOff: 'https://raw.github.com/wbotelhos/raty/master/img/star-off.png',
+	  click: function() {
+	    alert($(div).raty('score'));
+	  }
 	});
 }
 
@@ -41,18 +38,18 @@ var agent = (function() {
 	    		$('#wait').remove();
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword =  '<div class="keyword">' + data.result.results[i].summary + '</div>'
-				var summary = '<div class="summary">' + data.result.results[i].summary + '</div>'
-
+				var rating =  $('#star').clone().attr('id', '#star' + requestCount);
+				var summary = '<div class="summary">' + data.result.results[i].summary + rating.outerHTML + keyword + '</div>'
 				$(div).append(link);
 				$(div).append(summary);
-
+				stars('#star' + requestCount);
 	    	}
 	    }
     }
 
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
-    	requestCount += 1;
+    	this.requestCount += 1;
     	console.log(options.url);
     	$('#loading').show();
          $.ajax({
