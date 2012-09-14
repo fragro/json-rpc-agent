@@ -45,7 +45,7 @@ var agent = (function() {
 				var summary = '<div class="summary">' + data.result.results[i].summary + '<br>' + rating + '<br>' + keyword + '</div>'
 				$(div).append(link);
 				$(div).append(summary);
-				stars('#star' + requestCount);
+				stars('#star' + window.urlCount);
 	    	}
 	    }
     }
