@@ -8,24 +8,23 @@ var agent = {
 	version:"0.1.0.1",	
 	requestCount: 0,
 	debug: true,
-	//we need to support cross-domain requests since this is loaded on nutraspace server.
-	//need to test extensively on IE
-
 
 	//public functions
 	subscribe: function() {
 		this._send_request('subscribe', [this._userID, this._user_profile], this._successCallback, this._errorCallback);
-	}
+	},
 
 	recommendation: function() {
 		this._send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
-	}
+	},
 
 	rate: function(indexkey, rating) {
 		this._send_request('rate', [this._userID, indexkey, rating], this._successCallback, this._errorCallback);
-	}
+	},
 
     init: function (serviceUrl, options) {
+		//we need to support cross-domain requests since this is loaded on nutraspace server.
+		//need to test extensively on IE
 		jQuery.support.cors = true;
         //this.url = 'http://localhost:8080/jsonrpc';
         this._url = serviceUrl;
@@ -36,14 +35,14 @@ var agent = {
         	div: options.div;
         });
         this.recommendation();
-    }
+    },
 
     //private functions
 
     //successcallback for reccomendation
     _appendRec: function(data){
     	this._UI.append(data.result);
-    }
+    },
 
     _send_request: function (method, params, successCallback, errorCallback) {
     	var randomID=Math.floor(Math.random()*11100)
@@ -56,15 +55,15 @@ var agent = {
             error: function (err)  { errorCallback(data); }
 
      	});
-    }
+    },
 
 	_successCallback: function(data) {
 		alert(JSON.stringify(data));
-	}
+	},
 
 	_errorCallback: function(err) {
 		alert(JSON.stringify(err));
-	}
+	},
 
 }
 
