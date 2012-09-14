@@ -16,16 +16,16 @@ var agent = (function() {
 
     //private functions
     //successcallback for reccomendation
-    this._appendRec = function(data){
+    function appendRec(data){
     	for(var i in data.result.results){
     		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 			console.log(st);
 			console.log(this.div);
 			$(this.div).append(st);
     	}
-    },
+    }
 
-    this._send_request = function (method, params, successCallback, errorCallback) {
+    function _send_request(method, params, successCallback, errorCallback) {
     	var randomID=Math.floor(Math.random()*11100)
          $.ajax({
             url: this._url, 
@@ -35,32 +35,31 @@ var agent = (function() {
             success:  function (data) { successCallback(data); },
             error: function (err)  { errorCallback(data); }
      	});
-    },
+    }
     //test callback functions for debugging
-	this._successCallback = function(data) {
+	function _successCallback(data) {
 		console.log(JSON.stringify(data));
-	},
-
-	this._errorCallback = function(err) {
+	}
+	function _errorCallback(err) {
 		console.log(JSON.stringify(err));
-	},
+	}
 
 
 	return {
 		//public functions
-		this.subscribe = function() {
+		subscribe = function() {
 			this._send_request('subscribe', [this._userID, this._user_profile], this._successCallback, this._errorCallback);
 		},
 
-		this.recommendation = function() {
+		recommendation = function() {
 			this._send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
 		},
 
-		this.rate = function(indexkey, rating) {
+		rate = function(indexkey, rating) {
 			this._send_request('rate', [this._userID, indexkey, rating], this._successCallback, this._errorCallback);
 		},
 
-	    this.init = function (serviceUrl, options) {
+	    init = function (serviceUrl, options) {
 			//we need to support cross-domain requests since this is loaded on nutraspace server.
 			//need to test extensively on IE
 			jQuery.support.cors = true;
