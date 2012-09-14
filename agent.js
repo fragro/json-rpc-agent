@@ -39,27 +39,26 @@ $('#less').click( function() {
 			checkLessButton();
 
 		});
-	}
-	else{
+	}else{
 		checkLessButton();
-
 	}
+
 	console.log($(window.curDiv).prev().length);
 
 })
 $('#more').click( function() {
 	if(requestCount == 0){
 		agent.recommendation();
-		console.log('no request');
 		checkLessButton();
+		console.log('no request');
 	}
 	else if($(window.curDiv).next().length == 0){
 		console.log('empty next');
 		$(window.curDiv).fadeOut( function() {
 			agent.recommendation();
 			$(window.curDiv).next().fadeIn();
-			window.curDiv = '#' + $(window.curDiv).next().attr('id');
 			checkLessButton();
+			window.curDiv = '#' + $(window.curDiv).next().attr('id');
 
 		});
 	}
@@ -67,8 +66,8 @@ $('#more').click( function() {
 		console.log('full next');
 		$(window.curDiv).fadeOut( function() {
 			$(window.curDiv).next().fadeIn();
-			window.curDiv = '#' + $(window.curDiv).next().attr('id');
 			checkLessButton();
+			window.curDiv = '#' + $(window.curDiv).next().attr('id');
 		});
 	}
 })
