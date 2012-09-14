@@ -38,7 +38,7 @@ var agent = (function() {
 	    		$('#wait').remove();
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword =  '<div class="keyword">' + data.result.results[i].keyword + '</div>'
-				var rating =  $('#star').clone().attr('id', '#star' + requestCount);
+				var rating =  $('#star').clone();
 				var summary = '<div class="summary">' + data.result.results[i].summary + rating.outerHTML + keyword + '</div>'
 				$(div).append(link);
 				$(div).append(summary);
