@@ -31,7 +31,8 @@ var agent = {
         this._userID = options.userID;
         this._user_profile = options.profile;
         this.subscribe();
-        this._UI = agentUI.init( {
+        this._UI = agentUI;
+        this._UI.init( {
         	div: options.div,
         });
         this.recommendation();
