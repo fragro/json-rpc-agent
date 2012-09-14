@@ -36,10 +36,15 @@ $('#less').click( function() {
 		$(window.curDiv).fadeOut(function(){
 			$(window.curDiv).prev().fadeIn();
 			window.curDiv = '#' + $(window.curDiv).prev().attr('id');
+			checkLessButton();
+
 		});
 	}
+	else{
+		checkLessButton();
+
+	}
 	console.log($(window.curDiv).prev().length);
-	checkLessButton();
 
 })
 $('#more').click( function() {
