@@ -41,7 +41,7 @@ var agent = {
     //successcallback for reccomendation
     _appendRec: function(data){
     	for(var i in data.result.results){
-	    	console.log(data.result.results.i);
+	    	console.log(data.result.results.toString());
     		var st = '<div class="rec" id="' + i.id +'"><a href="' + i.url +'" target="_blank">' + i.title + '</a></div>';
 			console.log(this._div);
 			console.log(st);
