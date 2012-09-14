@@ -76,6 +76,7 @@ var agentUI = {
 
 	init: function(options){
 		this._div = options.div;
+		return this
 	},
 
 	append: function(indexkey, url, summary){
