@@ -47,19 +47,19 @@ var agent = (function() {
 
 	return {
 		//public functions
-		subscribe = function() {
+		subscribe: function() {
 			this._send_request('subscribe', [this._userID, this._user_profile], this._successCallback, this._errorCallback);
 		},
 
-		recommendation = function() {
+		recommendation: function() {
 			this._send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
 		},
 
-		rate = function(indexkey, rating) {
+		rate: function(indexkey, rating) {
 			this._send_request('rate', [this._userID, indexkey, rating], this._successCallback, this._errorCallback);
 		},
 
-	    init = function (serviceUrl, options) {
+	    init: function (serviceUrl, options) {
 			//we need to support cross-domain requests since this is loaded on nutraspace server.
 			//need to test extensively on IE
 			jQuery.support.cors = true;
