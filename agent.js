@@ -39,14 +39,27 @@ $('#less').click( function() {
 	});
 })
 $('#more').click( function() {
-	if(requestCount == 0 || $(window.curDiv).next().length == 0){
+	if(requestCount == 0){
 		agent.recommendation();
+		console.log('no request');
+	}
+	else if($(window.curDiv).next().length){
+		console.log('empty next');
+		$(window.curDiv).fadeOut( function() {
+			agent.recommendation();
+			$(window.curDiv).next().fadeIn();
+			checkLessButton();
+			window.curDiv = '#' + $(window.curDiv).next().attr('id');
+
+		});
 	}
 	else{
+		console.log('full next');
 		$(window.curDiv).fadeOut( function() {
 			$(window.curDiv).next().fadeIn();
 			checkLessButton();
-		});
+			window.curDiv = '#' + $(window.curDiv).next().attr('id');
+
 	}
 })
 
