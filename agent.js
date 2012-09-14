@@ -40,8 +40,8 @@ var agent = {
 
     //successcallback for reccomendation
     _appendRec: function(data){
-    	console.log(data);
     	for(var i in data.result.results){
+	    	console.log(i);
     		var st = '<div class="rec" id="' + i.id +'"><a href="' + i.url +'" target="_blank">' + i.title + '</a></div>';
 			console.log(this._div);
 			console.log(st);
@@ -50,7 +50,7 @@ var agent = {
     },
 
     _send_request: function (method, params, successCallback, errorCallback) {
-    	var randomID=Math.floor(Math.random()*1110)
+    	var randomID=Math.floor(Math.random()*11100)
          $.ajax({
             url: this._url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
@@ -62,7 +62,7 @@ var agent = {
      	});
 
     },
-
+    //test callback functions for debugging
 	_successCallback: function(data) {
 		console.log(JSON.stringify(data));
 	},
@@ -70,9 +70,5 @@ var agent = {
 	_errorCallback: function(err) {
 		console.log(JSON.stringify(err));
 	},
-
-	//JQuery UI Functions
-
-
 
 }
