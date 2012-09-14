@@ -7,10 +7,9 @@
 var agent = {
 	version:"0.1.0.1",	
 	requestCount: 0,
-	debug = true,
+	debug: true,
 	//we need to support cross-domain requests since this is loaded on nutraspace server.
 	//need to test extensively on IE
-	jQuery.support.cors = true,
 
 
 	//public functions
@@ -27,6 +26,7 @@ var agent = {
 	}
 
     init: function (serviceUrl, options) {
+		jQuery.support.cors = true;
         //this.url = 'http://localhost:8080/jsonrpc';
         this._url = serviceUrl;
         this._userID = options.userID;
