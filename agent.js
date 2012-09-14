@@ -8,6 +8,7 @@ var agent = {
 	version:"0.1.0.1",	
 	requestCount: 0,
 	debug: true,
+	div:'#recommendation',
 
 	//public functions
 	subscribe: function() {
@@ -44,7 +45,7 @@ var agent = {
     	for(var i in data.result.results){
     		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 			console.log(st);
-			console.log($(this.div).attr('id'));
+			console.log(this.div);
 			$(this.div).append(st);
     	}
     },
