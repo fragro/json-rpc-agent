@@ -6,11 +6,11 @@
 */
 var agent = {
 	version:"0.1.0.1",	
-	requestCount: 0
-	debug = true;
+	requestCount: 0,
+	debug = true,
 	//we need to support cross-domain requests since this is loaded on nutraspace server.
 	//need to test extensively on IE
-	jQuery.support.cors = true;
+	jQuery.support.cors = true,
 
 
 	//public functions
