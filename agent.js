@@ -21,16 +21,16 @@ var agent = (function() {
     	for(var i in data.result.results){
     		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 			console.log(st);
-			console.log(this.div);
-			$(this.div).append(st);
+			console.log(that.div);
+			$(that.div).append(st);
     	}
     }
 
     that._send_request = function(method, params, successCallback, errorCallback) {
     	var randomID=Math.floor(Math.random()*11100)
-    	console.log(this);
+    	console.log(that);
          $.ajax({
-            url: this._url, 
+            url: that._url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
