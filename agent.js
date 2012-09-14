@@ -64,7 +64,7 @@ var agent = (function() {
 			//need to test extensively on IE
 			jQuery.support.cors = true;
 	        //this.url = 'http://localhost:8080/jsonrpc';
-	        _url = serviceUrl;
+	        this._url = serviceUrl;
 	        this._userID = options.userID;
 	        this._user_profile = options.profile;
 			this.div = options.div;
