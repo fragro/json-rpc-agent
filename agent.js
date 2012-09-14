@@ -5,6 +5,20 @@
 * agent, sending back ratings or other types of feedback which in turn drives a collaborative filtering process.
 */
 
+function stars(){
+	$('.hover-star').rating({
+		focus: function(value, link){
+			var tip = $('#hover-test');
+			tip[0].data = tip[0].data || tip.html();
+			tip.html(link.title || 'value: '+value);
+		},
+		blur: function(value, link){
+			var tip = $('#hover-test');
+			$('#hover-test').html(tip[0].data || '');
+		}
+	});
+}
+
 var agent = (function() {
 	var version = "0.1.0.1";
 	var requestCount = 0;
@@ -19,13 +33,16 @@ var agent = (function() {
     //successcallback for reccomendation
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
-    		var link = "<h2>You've just subscribed, recommendations are being generated. In a moment click more recommendations</h2>"
+    		var link = "<h2 id='wait'>Recommendations are being generated. In a moment click 'More Recommendations'</h2>"
 			$(div).append(link);
     	}
     	else{
 	    	for(var i in data.result.results){
+	    		$('#wait').remove();
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
+				var keyword =  '<div class="keyword">' + data.result.results[i].summary + '</div>'
 				var summary = '<div class="summary">' + data.result.results[i].summary + '</div>'
+
 				$(div).append(link);
 				$(div).append(summary);
 
@@ -35,6 +52,7 @@ var agent = (function() {
 
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
+    	requestCount += 1;
     	console.log(options.url);
     	$('#loading').show();
          $.ajax({
@@ -42,9 +60,8 @@ var agent = (function() {
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) {console.log(data);  options.successcall(data, options.div); 
- },
-            error: function (err)  { options.errorcall(data); }
+            success:  function (data) {console.log(data); $('#loading').hide(); options.successcall(data, options.div); },
+            error: function (err)  { $('#loading').hide(); options.errorcall(data); }
      	});
     }
 
