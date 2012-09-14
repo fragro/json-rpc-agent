@@ -42,7 +42,7 @@ var agent = {
     //successcallback for reccomendation
     _appendRec: function(data){
     	for(var i in data.results){
-    		this._UI.append(i.indexkey, i.links.fields.url, i.links.fields.title);
+    		this._UI.append(i.id, i.links.fields.url, i.links.fields.title);
     	}
     },
 
