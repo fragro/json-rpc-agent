@@ -42,7 +42,10 @@ var agent = {
     _appendRec: function(data){
     	console.log(data);
     	for(var i in data.result.results){
-    		this._append(i.id, i.url, i.title);
+    		var st = '<div class="rec" id="' + i.id +'"><a href="' + i.url +'" target="_blank">' + i.title + '</a></div>';
+			console.log(this._div);
+			console.log(st);
+			this._div.append(st);
     	}
     },
 
@@ -70,11 +73,6 @@ var agent = {
 
 	//JQuery UI Functions
 
-	_append: function(indexkey, url, summary){
-		var st = '<div class="rec" id="' + indexkey +'"><a href="' + url +'" target="_blank">' + summary + '</a></div>';
-		console.log(this._div);
-		console.log(st);
-		this._div.append(st);
-	},
+
 
 }
