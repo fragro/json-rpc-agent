@@ -47,12 +47,12 @@ var agent = {
     _send_request: function (method, params, successCallback, errorCallback) {
     	var randomID=Math.floor(Math.random()*1110)
          $.ajax({
-            url: 'http://localhost:8080/jsonrpc', 
-            data: JSON.stringify ({jsonrpc:'2.0', method:'subscribe', params:[['user', 'dude']], id:1} ),  // id is needed !!
+            url: this._url, 
+            data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) { alert("The result is : " + JSON.stringify(data));},
-            error: function (err)  { alert("Error"); alert(JSON.stringify(err));}
+            success:  function (data) { successCallback(data); },
+            error: function (err)  { errorCallback(data); }
 
      	});
 
