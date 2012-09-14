@@ -19,10 +19,9 @@ var agent = (function() {
     //successcallback for reccomendation
     function _appendRec(data, div){
     	for(var i in data.result.results){
-    		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
-			console.log(st);
-			console.log(div);
-			$(div).append(st);
+    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
+			var summary = '<span class="summary">' + data.result.results[i].summary + '</span>'
+			$(div).append(link);
     	}
     }
 
@@ -34,7 +33,7 @@ var agent = (function() {
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) { options.successcall(data, options.div); },
+            success:  function (data) {console.log(data); options.successcall(data, options.div); },
             error: function (err)  { options.errorcall(data); }
      	});
     }
