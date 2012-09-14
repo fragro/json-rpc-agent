@@ -23,11 +23,11 @@ function stars(div, id){
 
 //INTERFACE SCRIPT
 function checkLessButton(){
-	if($(window.curDiv).prev().isEmptyObject()){
-		$('#less').hide();
+	if($(window.curDiv).prev()){
+		$('#less').show();
 	}
 	else{
-		$('#less').show();
+		$('#less').hide();
 	}
 }
 $('#less').click( function() {
@@ -39,7 +39,7 @@ $('#less').click( function() {
 	});
 })
 $('#more').click( function() {
-	if(requestCount == 0 || $(window.curDiv).next().isEmptyObject()){
+	if(requestCount == 0 || $(window.curDiv).next().length == 0){
 		agent.recommendation();
 	}
 	else{
