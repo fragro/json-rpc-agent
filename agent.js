@@ -59,11 +59,11 @@ var agent = {
     },
 
 	_successCallback: function(data) {
-		alert(JSON.stringify(data));
+		console.log(JSON.stringify(data));
 	},
 
 	_errorCallback: function(err) {
-		alert(JSON.stringify(err));
+		console.log(JSON.stringify(err));
 	},
 
 }
