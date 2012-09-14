@@ -38,11 +38,12 @@ var agent = (function() {
 	    		$('#wait').remove();
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword =  '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
-				var rating =  $('#star').clone().innerHTML;
+				var rating =  '<div id="star' + requestCount  + '"></div>'
 				alert(rating);
-				var summary = '<div class="summary">' + data.result.results[i].summary + '<br>' + keyword + '</div>'
+				var summary = '<div class="summary">' + data.result.results[i].summary + '<br>' + rating + '<br>' + keyword + '</div>'
 				$(div).append(link);
 				$(div).append(summary);
+				stars('star' + requestCount);
 	    	}
 	    }
     }
