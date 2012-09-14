@@ -28,9 +28,9 @@ var agent = (function() {
 
     function _send_request(url, method, params, successCallback, errorCallback) {
     	var randomID=Math.floor(Math.random()*11100)
-    	console.log(_url);
+    	console.log(url);
          $.ajax({
-            url: _url, 
+            url: url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
