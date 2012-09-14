@@ -48,7 +48,7 @@ var agent = {
     	var randomID=Math.floor(Math.random()*11100)
         $.ajax({
 	        url: this.url, 
-	        data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
+	        data: JSON.stringify ({jsonrpc:'2.0', method:'subscribe', params:[['fragor', '1234']], id:randomID} ),  // id is needed !!
 	        type:"POST",
 	        dataType:"json",
             success:  function (data) { successCallback(data); },
