@@ -6,18 +6,41 @@
 */
 
 window.urlCount = 0;
+window.requestCount = 0;
 
 
-function stars(div){
+function stars(div, id){
 	$(div).raty({
 	  path: '',
 	  starOn: 'https://raw.github.com/wbotelhos/raty/master/img/star-on.png',
 	  starOff: 'https://raw.github.com/wbotelhos/raty/master/img/star-off.png',
 	  click: function() {
-	    alert($(div).raty('score'));
+	    alert($(div).raty('score') + $('#' + id).html());
 	  }
 	});
 }
+
+//INTERFACE SCRIPT
+function checkLessButton(){
+	if(window.requestCount == 1){
+		$('#less').hide();
+	}
+	else{
+		$('#less').show();
+	}
+}
+$('#less').click( function() {
+	//cur div is window.requestCount
+	$('#recommendation' + window.requestCount).fadeOut()
+	window.requestCount -= 1;
+	checkLessButton();
+})
+$('#more').click( function() {
+	$('#recommendation' + window.requestCount).fadeOut()
+	agent.recommendation();
+	checkLessButton();
+
+})
 
 var agent = (function() {
 	var version = "0.1.0.1";
@@ -36,16 +59,19 @@ var agent = (function() {
 			$(div).append(link);
     	}
     	else{
+			//log the number of recommendation requests that pass
+    		window.requestCount += 1;
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
 	    		$('#wait').remove();
+	    		$(div).append('<div id="recommendation' + window.requestCount + '"></div>')
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
-				var keyword =  '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
-				var rating =  '<div class="star-rate" id="star' + window.urlCount  + '"></div>'
+				var keyword = '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
+				var rating = '<div class="star-rate" id="star' + window.urlCount  + '"></div>'
 				var summary = '<div class="summary">' + data.result.results[i].summary + '<br>' + rating + '<br>' + keyword + '</div>'
-				$(div).append(link);
-				$(div).append(summary);
-				stars('#star' + window.urlCount);
+				$('#recommendation' + window.requestCount).append(link);
+				$('#recommendation' + window.requestCount).append(summary);
+				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
 	    }
     }
