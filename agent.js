@@ -17,16 +17,16 @@ var agent = (function() {
 
     //private functions
     //successcallback for reccomendation
-    function _appendRec(data){
+    function _appendRec(data, div){
     	for(var i in data.result.results){
     		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 			console.log(st);
-			console.log(this.div);
-			$(this.div).append(st);
+			console.log(div);
+			$(div).append(st);
     	}
     }
 
-    function _send_request(url, method, params, successCallback, errorCallback) {
+    function _send_request(div, url, method, params, successCallback, errorCallback) {
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(url);
          $.ajax({
@@ -34,7 +34,7 @@ var agent = (function() {
             data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) { successCallback(data); },
+            success:  function (data) { successCallback(data, div); },
             error: function (err)  { errorCallback(data); }
      	});
     }
