@@ -18,11 +18,19 @@ var agent = (function() {
     //private functions
     //successcallback for reccomendation
     function _appendRec(data, div){
-    	for(var i in data.result.results){
-    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
-			var summary = '<span class="summary">' + data.result.results[i].summary + '</span>'
+    	if(data.result.results.length == 0){
+    		var link = "<h2>You've just subscribed, recommendations are being generated. In a moment click more recommendations</h2>"
 			$(div).append(link);
     	}
+    	else{
+	    	for(var i in data.result.results){
+	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
+				var summary = '<span class="summary">' + data.result.results[i].summary + '</span>'
+				$(div).append(link);
+				$(div).append(summary);
+
+	    	}
+	    }
     }
 
     function _send_request(options) {
