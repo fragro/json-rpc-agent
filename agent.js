@@ -30,10 +30,7 @@ var agent = {
         this._url = serviceUrl;
         this._userID = options.userID;
         this._user_profile = options.profile;
-        this._UI = agentUI;
-        this._UI.init( {
-        	div: options.div,
-        });
+		this._div = options.div;
         //initialized now subscribe the user to the service and grab recommendations
         this.subscribe();
         this.recommendation();
@@ -45,7 +42,7 @@ var agent = {
     _appendRec: function(data){
     	console.log(data);
     	for(var i in data.result.results){
-    		this._UI.append(i.id, i.url, i.title);
+    		this._append(i.id, i.url, i.title);
     	}
     },
 
@@ -71,14 +68,7 @@ var agent = {
 		console.log(JSON.stringify(err));
 	},
 
-}
-
-//controls the agent's UI via jQuery
-var agentUI = {
-
-	init: function(options){
-		this._div = options.div;
-	},
+	//JQuery UI Functions
 
 	append: function(indexkey, url, summary){
 		var st = '<div class="rec" id="' + indexkey +'"><a href="' + url +'" target="_blank">' + summary + '</a></div>';
