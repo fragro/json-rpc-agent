@@ -37,20 +37,23 @@ var agent = (function() {
             error: function (err)  { errorCallback(data); }
      	});
     }
+    
     //test callback functions for debugging
 	function _successCallback(data) {
 		console.log(JSON.stringify(data));
 	}
+
 	function _errorCallback(err) {
 		console.log(JSON.stringify(err));
 	}
+
 	function subscribe() {
 		_send_request('subscribe', [this._userID, this._user_profile], this._successCallback, this._errorCallback);
-	},
+	}
 
 	function recommendation() {
 		_send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
-	},
+	}
 
 
 	return {
