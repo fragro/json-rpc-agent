@@ -43,7 +43,7 @@ var agent = {
     _appendRec: function(data){
     	console.log(data);
     	for(var i in data.result.results){
-    		this._UI.append(i.id, i.links.fields.url, i.links.fields.title);
+    		this._UI.append(i.id, i.url, i.title);
     	}
     },
 
