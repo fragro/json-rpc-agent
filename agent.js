@@ -13,6 +13,7 @@ var agent = (function() {
 	var _url;
 	var _userID;
 	var _user_profile;
+	var that = this;
 
     //private functions
     //successcallback for reccomendation
@@ -20,8 +21,8 @@ var agent = (function() {
     	for(var i in data.result.results){
     		var st = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 			console.log(st);
-			console.log(this.div);
-			$(this.div).append(st);
+			console.log(that.div);
+			$(that.div).append(st);
     	}
     }
 
@@ -29,7 +30,7 @@ var agent = (function() {
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(this);
          $.ajax({
-            url: this._url, 
+            url: that._url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:method, params:[params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
@@ -37,7 +38,7 @@ var agent = (function() {
             error: function (err)  { errorCallback(data); }
      	});
     }
-    
+
     //test callback functions for debugging
 	function _successCallback(data) {
 		console.log(JSON.stringify(data));
@@ -48,11 +49,11 @@ var agent = (function() {
 	}
 
 	function subscribe() {
-		_send_request('subscribe', [this._userID, this._user_profile], this._successCallback, this._errorCallback);
+		_send_request('subscribe', [that._userID, that._user_profile], that._successCallback, that._errorCallback);
 	}
 
 	function recommendation() {
-		_send_request('recommendation', [this._userID], this._appendRec, this._errorCallback);
+		_send_request('recommendation', [that._userID], that._appendRec, that._errorCallback);
 	}
 
 
