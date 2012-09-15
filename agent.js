@@ -86,7 +86,7 @@ var agent = (function() {
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
     		$('#wait').html("Recommendations are being generated.<br> In a moment click 'More Recommendations'");
-    		that.recommendation();
+    		console.log(this);
 			$(div).append(link);
     	}
     	else{
