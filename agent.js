@@ -90,6 +90,7 @@ var agent = (function() {
     		if(window.retries < 5){
     			setTimeout(function() {agent.recommendation();},1250);
     			window.retries += 1;
+    		}
     		else{
     			$('#wait').html("The Service appears to be down, try again later.");
     		}
