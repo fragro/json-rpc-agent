@@ -8,6 +8,7 @@
 window.urlCount = 0;
 window.requestCount = 0;
 window.curDiv = '';
+window.retries = 0;
 
 
 function stars(div, id){
@@ -86,9 +87,17 @@ var agent = (function() {
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
     		$('#wait').html("Recommendations are being generated.<br> Wait a moment please.");
-    		setTimeout(function() {agent.recommendation();},1250);
+    		if(window.retries < 5){
+    			setTimeout(function() {agent.recommendation();},1250);
+    			window.retries += 1;
+    		else{
+    			$('#wait').html("The Service appears to be down, try again later.");
+    		}
+
     	}
     	else{
+    		//reset retries
+    		window.retries = 0;
     		$('#loading').hide();
 			//log the number of recommendation requests that pass
     		window.requestCount += 1;
