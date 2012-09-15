@@ -85,9 +85,8 @@ var agent = (function() {
     //successcallback for reccomendation
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
-    		$('#wait').html("Recommendations are being generated.<br> In a moment click 'More Recommendations'");
-    		agent.recommendation();
-			$(div).append(link);
+    		$('#wait').html("Recommendations are being generated.<br> Wait a moment please.");
+    		setTimeout(function() {agent.recommendation();},1250);
     	}
     	else{
     		$('#loading').hide();
