@@ -93,7 +93,6 @@ var agent = (function() {
     		else{
     			$('#wait').html("The Service appears to be down, try again later.");
     		}
-
     	}
     	else{
     		//reset retries
