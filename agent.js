@@ -88,7 +88,7 @@ var agent = (function() {
     	if(data.result.results.length == 0){
     		$('#wait').html("Recommendations are being generated.<br> Wait a moment please.");
     		if(window.retries < 5){
-    			setTimeout(function() {agent.recommendation();},2500);
+    			setTimeout(function() {agent.recommendation();},5000);
     			window.retries += 1;
     		}
     		else{
