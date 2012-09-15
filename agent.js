@@ -86,16 +86,18 @@ var agent = (function() {
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
     		$('#wait').html("Recommendations are being generated.<br> In a moment click 'More Recommendations'");
+    		recommendation.call(this);
 			$(div).append(link);
     	}
     	else{
+    		$('#loading').hide();
 			//log the number of recommendation requests that pass
     		window.requestCount += 1;
     		$(div).append('<div id="recommendation' + window.requestCount + '"></div>')
     		window.curDiv = '#recommendation' + window.requestCount;
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
-	    		$('#wait').html();
+	    		$('#wait').html('');
 	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
 				var keyword = '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
 				var rating = '<div class="star-rate" id="star' + window.urlCount  + '"></div>'
@@ -116,17 +118,19 @@ var agent = (function() {
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
-            success:  function (data) {console.log(data); $('#loading').hide(); options.successcall(data, options.div); },
-            error: function (err)  { $('#loading').hide(); options.errorcall(data); }
+            success:  function (data) {console.log(data);  options.successcall(data, options.div); },
+            error: function (err)  { options.errorcall(data); }
      	});
     }
 
     //test callback functions for debugging
 	function _successCallback(data) {
+		$('#loading').hide();
 		console.log(JSON.stringify(data));
 	}
 
 	function _errorCallback(err) {
+		$('#loading').hide();
 		console.log(JSON.stringify(err));
 	}
 
