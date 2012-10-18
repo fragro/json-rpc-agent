@@ -116,7 +116,6 @@ var agent = (function() {
 
 	//this function is called after we have successfully completed a transaction
 	function _cleanup(){
-		$('#alert_box').html('');
 		$('#loading').hide();
 	}
 
@@ -155,8 +154,9 @@ var agent = (function() {
 				_append('#recommended_link', context, '#recommendation' + window.requestCount);
 				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
-	    }
 	    _cleanup();
+
+	    }
     }
 
     function _send_request(options) {
