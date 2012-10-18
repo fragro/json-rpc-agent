@@ -142,15 +142,16 @@ var agent = (function() {
     		_render('#recommendation_container', {count: window.requestCount}, '#recommendations')
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
+		    	var starid = 'star' + window.urlCount;
 	    		data = {
 	    			id: data.result.results[i].id,
 	    			url: data.result.results[i].url,
 	    			title: data.result.results[i].title,
 	    			summary: data.result.results[i].summary,
-	    			star_id = 'star' + window.urlCount
+	    			star_id = starid;
 	    		}
 				$('#recommendation' + window.requestCount).append(red);
-				_append('#recommended_link', data, '#recommendation' + window.requestCount)
+				_append('#recommended_link', data, '#recommendation' + window.requestCount);
 				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
 	    }
