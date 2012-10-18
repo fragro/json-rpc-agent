@@ -116,6 +116,7 @@ var agent = (function() {
 
 	//this function is called after we have successfully completed a transaction
 	function _cleanup(){
+		$('#alert_box').html('');
 		$('#loading').hide();
 	}
 
