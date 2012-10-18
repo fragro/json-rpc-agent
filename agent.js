@@ -130,7 +130,7 @@ var agent = (function() {
             type:"POST",
             dataType:"json",
             success:  function (data) {console.log(data);  options.successcall(data, options.div); },
-            error: function (err)  { options.errorcall(data); }
+            error: function (err)  { options.errorcall(err); }
      	});
     }
 
