@@ -82,19 +82,43 @@ var agent = (function() {
 	var _user_profile;
 	var that = this;
 
+
+	//rendering functions using mustache.js
+	function _render(template, data, render_to){
+	    var template = $(template).html();
+	    var html = Mustache.to_html(template, data);
+	    $(render_to).html(html);
+	}
+
+	function _alert(title, text){
+		var data = {
+			title: title,
+			detail: text
+		}
+		this._render('#alert', data, '#alert_box');
+	}
+
+	function _warning(title, text){
+		var data = {
+			title: title,
+			detail: text
+		}
+		this._render('#warning', data, '#alert_box');
+	}
+
     //private functions
     //successcallback for reccomendation
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
     		//render waiting
-    		this._alert('Wait a moment...', 'Your results are being generated');
+    		_alert('Wait a moment...', 'Your results are being generated');
     		//set a timeout for the number of retries
     		if(window.retries < 5){
     			setTimeout(function() {agent.recommendation();},5000);
     			window.retries += 1;
     		}
     		else{
-    			this._warning('Uh Oh', 'It looks like the service is down');
+    			_warning('Uh Oh', 'It looks like the service is down');
     		}
     	}
     	else{
@@ -117,7 +141,7 @@ var agent = (function() {
 				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
 	    }
-	    this._cleanup();
+	    agent._cleanup();
     }
 
     function _send_request(options) {
@@ -182,28 +206,6 @@ var agent = (function() {
 			successcall: _successCallback, 
 			errorcall: _errorCallback
 		});
-	}
-
-	function _render(template, data, render_to){
-	    var template = $(template).html();
-	    var html = Mustache.to_html(template, data);
-	    $(render_to).html(html);
-	}
-
-	function _alert(title, text){
-		var data = {
-			title: title,
-			detail: text
-		}
-		this._render('#alert', data, '#alert_box');
-	}
-
-	function _warning(title, text){
-		var data = {
-			title: title,
-			detail: text
-		}
-		this._render('#warning', data, '#alert_box');
 	}
 
 	return {
