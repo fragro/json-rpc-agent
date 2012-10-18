@@ -102,7 +102,7 @@ var agent = (function() {
 			title: title,
 			detail: text
 		}
-		this._render('#alert', data, '#alert_box');
+		_render('#alert', data, '#alert_box');
 	}
 
 	function _warning(title, text){
