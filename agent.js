@@ -110,7 +110,7 @@ var agent = (function() {
 			title: title,
 			detail: text
 		}
-		this._render('#warning', data, '#alert_box');
+		_render('#warning', data, '#alert_box');
 	}
 
 	//this function is called after we have successfully completed a transaction
