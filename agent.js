@@ -148,7 +148,7 @@ var agent = (function() {
 	    			url: data.result.results[i].url,
 	    			title: data.result.results[i].title,
 	    			summary: data.result.results[i].summary,
-	    			star_id = starid;
+	    			star_id = starid
 	    		}
 				$('#recommendation' + window.requestCount).append(red);
 				_append('#recommended_link', data, '#recommendation' + window.requestCount);
