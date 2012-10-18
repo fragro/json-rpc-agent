@@ -138,6 +138,7 @@ var agent = (function() {
     		//reset retries
     		window.retries = 0;
 			//log the number of recommendation requests that pass
+			$('#recommendation' + window.requestCount).hide();
     		window.requestCount += 1;
     		_append('#recommendation_container', {count: window.requestCount}, '#recommendations')
 	    	for(var i in data.result.results){
