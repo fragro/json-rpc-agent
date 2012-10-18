@@ -143,14 +143,14 @@ var agent = (function() {
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
 		    	var starid = 'star' + window.urlCount;
-	    		data = {
+	    		context = {
 	    			id: data.result.results[i].id,
 	    			url: data.result.results[i].url,
 	    			title: data.result.results[i].title,
 	    			summary: data.result.results[i].summary,
 	    			starid: starid
 	    		}
-				_append('#recommended_link', data, '#recommendation' + window.requestCount);
+				_append('#recommended_link', context, '#recommendation' + window.requestCount);
 				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
 	    }
