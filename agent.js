@@ -150,7 +150,6 @@ var agent = (function() {
 	    			summary: data.result.results[i].summary,
 	    			starid: starid
 	    		}
-				$('#recommendation' + window.requestCount).append(red);
 				_append('#recommended_link', data, '#recommendation' + window.requestCount);
 				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
