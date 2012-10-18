@@ -139,7 +139,7 @@ var agent = (function() {
     		window.retries = 0;
 			//log the number of recommendation requests that pass
     		window.requestCount += 1;
-    		_render('#recommendation_container', {count: window.requestCount}, '#recommendations')
+    		_append('#recommendation_container', {count: window.requestCount}, '#recommendations')
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
 		    	var starid = 'star' + window.urlCount;
@@ -148,7 +148,7 @@ var agent = (function() {
 	    			url: data.result.results[i].url,
 	    			title: data.result.results[i].title,
 	    			summary: data.result.results[i].summary,
-	    			star_id: starid
+	    			starid: star_id
 	    		}
 				$('#recommendation' + window.requestCount).append(red);
 				_append('#recommended_link', data, '#recommendation' + window.requestCount);
