@@ -86,13 +86,15 @@ var agent = (function() {
     //successcallback for reccomendation
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
-    		$('#wait').html("Recommendations are being generated.<br> Wait a moment please.");
+    		//render waiting
+    		this._alert('Wait a moment...', 'Your results are being generated');
+    		//set a timeout for the number of retries
     		if(window.retries < 5){
     			setTimeout(function() {agent.recommendation();},5000);
     			window.retries += 1;
     		}
     		else{
-    			$('#wait').html("The Service appears to be down, try again later.");
+    			this._warning('Uh Oh', 'It looks like the service is down');
     		}
     	}
     	else{
@@ -115,12 +117,13 @@ var agent = (function() {
 				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
 	    }
+	    this._cleanup();
     }
 
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(options.url);
-    	$('#loading').show();
+		$('#loading').width("33%");
          $.ajax({
             url: options.url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
@@ -133,13 +136,19 @@ var agent = (function() {
 
     //test callback functions for debugging
 	function _successCallback(data) {
-		$('#loading').hide();
+		$('#loading').width("66%");
 		console.log(JSON.stringify(data));
 	}
 
 	function _errorCallback(err) {
-		$('#loading').hide();
+		$('#loading').width("66%");
 		console.log(JSON.stringify(err));
+	}
+
+	//this function is called after we have successfully completed a transaction
+	function _cleanup(){
+		$('#loading').width("0%");
+		$('#alert_box').html('');
 	}
 
 	function subscribe() {
@@ -175,6 +184,27 @@ var agent = (function() {
 		});
 	}
 
+	function _render(template, data, render_to){
+	    var template = $(template).html();
+	    var html = Mustache.to_html(template, data);
+	    $(render_to).html(html);
+	}
+
+	function _alert(title, text){
+		var data = {
+			title: title,
+			detail: text
+		}
+		this._render('#alert', data, '#alert_box');
+	}
+
+	function _warning(title, text){
+		var data = {
+			title: title,
+			detail: text
+		}
+		this._render('#warning', data, '#alert_box');
+	}
 
 	return {
 		//public functions
