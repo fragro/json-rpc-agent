@@ -90,6 +90,13 @@ var agent = (function() {
 	    $(render_to).html(html);
 	}
 
+	//rendering functions using mustache.js
+	function _append(template, data, render_to){
+	    var template = $(template).html();
+	    var html = Mustache.to_html(template, data);
+	    $(render_to).append(html);
+	}
+
 	function _alert(title, text){
 		var data = {
 			title: title,
@@ -104,6 +111,12 @@ var agent = (function() {
 			detail: text
 		}
 		this._render('#warning', data, '#alert_box');
+	}
+
+	//this function is called after we have successfully completed a transaction
+	function _cleanup(){
+		$('#alert_box').html('');
+		$('#loading').hide();
 	}
 
     //private functions
@@ -124,32 +137,33 @@ var agent = (function() {
     	else{
     		//reset retries
     		window.retries = 0;
-    		$('#loading').hide();
 			//log the number of recommendation requests that pass
     		window.requestCount += 1;
-    		$(div).append('<div id="recommendation' + window.requestCount + '"></div>')
-    		window.curDiv = '#recommendation' + window.requestCount;
+    		_render('#recommendation_container', {count: window.requestCount}, '#recommendations')
 	    	for(var i in data.result.results){
 		    	window.urlCount += 1;
-	    		$('#wait').html('');
-	    		var link = '<div class="rec" id="' + data.result.results[i].id +'"><a href="' + data.result.results[i].url +'" target="_blank">' + data.result.results[i].title + '</a></div>';
-				var keyword = '<div class="keyword">Keyword: ' + data.result.results[i].keyword + '</div>'
-				var rating = '<div class="star-rate" id="star' + window.urlCount  + '"></div>'
-				var summary = '<div class="summary">' + data.result.results[i].summary + '<div>'+ rating + keyword + '</div></div>'
-				$('#recommendation' + window.requestCount).append(link);
-				$('#recommendation' + window.requestCount).append(summary);
+	    		data = {
+	    			id: data.result.results[i].id,
+	    			url: data.result.results[i].url,
+	    			title: data.result.results[i].title,
+	    			summary: data.result.results[i].summary,
+	    			star_id = 'star' + window.urlCount
+	    		}
+				$('#recommendation' + window.requestCount).append(red);
+				_append('#recommended_link', data, '#recommendation' + window.requestCount)
 				stars('#star' + window.urlCount, data.result.results[i].id);
 	    	}
 	    }
-	    agent._cleanup();
+	    _cleanup();
     }
 
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(options.url);
-		$('#loading').width("33%");
+		$('#loading').show();
          $.ajax({
             url: options.url, 
+            dataType: 'jsonp',
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
             dataType:"json",
@@ -160,20 +174,15 @@ var agent = (function() {
 
     //test callback functions for debugging
 	function _successCallback(data) {
-		$('#loading').width("66%");
+	    _cleanup();
 		console.log(JSON.stringify(data));
 	}
 
 	function _errorCallback(err) {
-		$('#loading').width("66%");
+	    _cleanup();
 		console.log(JSON.stringify(err));
 	}
 
-	//this function is called after we have successfully completed a transaction
-	function _cleanup(){
-		$('#loading').width("0%");
-		$('#alert_box').html('');
-	}
 
 	function subscribe() {
 		_send_request({
