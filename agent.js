@@ -149,7 +149,7 @@ var agent = (function() {
 	    			url: data.result.results[i].url,
 	    			title: data.result.results[i].title,
 	    			summary: data.result.results[i].summary,
-	    			starid: starid
+	    			star_id: starid
 	    		}
 				_append('#recommended_link', context, '#recommendation' + window.requestCount);
 				stars('#star' + window.urlCount, data.result.results[i].id);
