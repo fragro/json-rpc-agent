@@ -102,6 +102,7 @@ var agent = (function() {
 			title: title,
 			detail: text
 		}
+		console.log(data);
 		_render('#alert', data, '#alert_box');
 	}
 
