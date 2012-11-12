@@ -79,7 +79,6 @@ var agent = (function() {
 	var div = '#recommendation';
 	var _url;
 	var _userID;
-	var _user_profile;
 	var that = this;
 
 
@@ -192,18 +191,18 @@ var agent = (function() {
 			div: this.div, 
 			url: this._url,
 			method: 'subscribe', 
-			params: [this._userID, this._user_profile], 
+			params: [this._userID, this._search], 
 			successcall: _successCallback, 
 			errorcall: _errorCallback
 		});
 	}
 
-	function recommendation() {
+	function api() {
 		_send_request({	
 			div: this.div, 
 			url: this._url,
-			method: 'recommendation', 
-			params: [this._userID], 
+			method: 'api', 
+			params: [this._userID, this._search, this._type], 
 			successcall: _appendRec, 
 			errorcall: _errorCallback
 		});
@@ -231,12 +230,13 @@ var agent = (function() {
 	        //this.url = 'http://localhost:8080/jsonrpc';
 	        this._url = serviceUrl;
 	        this._userID = options.userID;
-	        this._user_profile = options.profile;
+	        this._search = options.search;
+	        this._type = 'database';
 			this.div = options.div;
 	        console.log(this);
 	        //initialized now subscribe the user to the service and grab recommendations
-	        subscribe.call(this);
-	        recommendation.call(this);
+	        //subscribe.call(this);
+	        api.call(this);
 	    },
 	}
 })();
