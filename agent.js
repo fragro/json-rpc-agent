@@ -222,7 +222,7 @@ var agent = (function() {
 	return {
 		//public functions
 		subscribe: subscribe,
-		recommendation: recommendation,
+		api: api,
 		rate: rate,
 	    init: function (serviceUrl, options) {
 			//we need to support cross-domain requests since this is loaded on nutraspace server.
