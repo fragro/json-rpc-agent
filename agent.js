@@ -121,9 +121,7 @@ var agent = (function() {
 
 	function parseSearchData(data){
 		for(hit in data.hits){
-			if(hit._source._cls == 'Base.PubMed'){
-				alert(hit._source.name);
-			}
+			console.log(hit);
 		}
 	}
 
