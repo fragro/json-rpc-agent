@@ -127,7 +127,7 @@ var agent = (function() {
     		_alert('Wait a moment...', 'Your results are being generated');
     		//set a timeout for the number of retries
     		if(window.retries < 5){
-    			setTimeout(function() {agent.recommendation();},5000);
+    			setTimeout(function() {},5000);
     			window.retries += 1;
     		}
     		else{
@@ -140,19 +140,7 @@ var agent = (function() {
 			//log the number of recommendation requests that pass
 			$('#recommendation' + window.requestCount).hide();
     		window.requestCount += 1;
-    		_append('#recommendation_container', {count: window.requestCount}, '#recommendations')
-	    	for(var i in data.result.results){
-		    	window.urlCount += 1;
-		    	var starid = 'star' + window.urlCount;
-	    		context = {
-	    			id: data.result.results[i].id,
-	    			url: data.result.results[i].url,
-	    			title: data.result.results[i].title,
-	    			summary: data.result.results[i].summary,
-	    			star_id: starid
-	    		}
-				_append('#recommended_link', context, '#recommendation' + window.requestCount);
-				stars('#star' + window.urlCount, data.result.results[i].id);
+
 	    	}
 	    _cleanup();
 
@@ -198,15 +186,12 @@ var agent = (function() {
 	}
 
 	function api() {
-		_send_request({	
-			div: this.div, 
-			url: this._url,
-			method: 'api', 
-			params: [this._userID, this._search, this._type], 
-			successcall: _appendRec, 
-			errorcall: _errorCallback
+		$.getJSON('http://localhost:9200/mongoindex/base/_search?q=keywords:' + this._search, 
+		  success: function(data) {
+		  		console.log(data);
 		});
 	}
+
 
 	function rate(indexkey, rating) {
 		_send_request({
