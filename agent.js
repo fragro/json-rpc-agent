@@ -124,6 +124,7 @@ var agent = (function() {
 		var data = results.hits.hits;
 		if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
+                	console.log(data[i]['pmc']);
                     source = data[i].fields;
 					_append('#pubmed', source, '#publications');
 					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
