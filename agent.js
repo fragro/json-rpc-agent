@@ -144,7 +144,6 @@ var agent = (function() {
 	    	}
 	    _cleanup();
 
-	    }
     }
 
     function _send_request(options) {
