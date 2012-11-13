@@ -120,6 +120,7 @@ var agent = (function() {
 	}
 
 	function parseSearchData(results){
+		console.log(results);
 		var data = results.hits.hits;
 		if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
