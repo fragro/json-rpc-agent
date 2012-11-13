@@ -122,7 +122,7 @@ var agent = (function() {
 	function parseSearchData(data){
 		console.log(data);
 		for(hit in data.hits.hits){
-			console.log(hit.type);
+			console.log(hit);
 			if(hit._source._cls == 'Base.PubMed'){
 				//render pubmed template
 				_append('#pubmed', hit._source, '#publications');
@@ -142,8 +142,8 @@ var agent = (function() {
     			setTimeout(function() {},5000);
     			window.retries += 1;
     		}
-    		else{
-    			_warning('Uh Oh', 'It looks like the service is down');
+    		else
+{    			_warning('Uh Oh', 'It looks like the service is down');
     		}
     	}
     	else{
