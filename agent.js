@@ -123,6 +123,7 @@ var agent = (function() {
 		console.log(data);
 		for(hit in data.hits.hits){
 			if(hit._cls == 'Base.PubMed'){
+				console.log(hit._source);
 				//render pubmed template
 				_append('#pubmed', hit._source, '#publications');
 				stars('#star_pub_' + hit._source.pmc, 'pubid' + hit._source.pmc);
