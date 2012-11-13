@@ -120,7 +120,7 @@ var agent = (function() {
 	}
 
 	function parseSearchData(data){
-		for(hit in data.hit){
+		for(hit in data.hits){
 			console.log(data);
 			console.log(hit);
 		}
