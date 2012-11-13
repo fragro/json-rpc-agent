@@ -126,13 +126,12 @@ var agent = (function() {
                     source = data[i].fields;
 					_append('#pubmed', source, '#publications');
 					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
-            }
+            	}
 
-            $('#res').removeClass('text-error').addClass('text-success').html(content);
+            //$('#res').removeClass('text-error').addClass('text-success').html(content);
         } else {
-            $('#res').removeClass('text-success').addClass('text-error').html('No results found.');
+            //$('#res').removeClass('text-success').addClass('text-error').html('No results found.');
     	}
-	}
 	}
 
     //private functions
