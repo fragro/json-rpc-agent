@@ -122,6 +122,7 @@ var agent = (function() {
 	function parseSearchData(data){
 		console.log(data);
 		for(hit in data.hits.hits){
+			console.log(hit._source);
 			if(hit._source._cls == 'Base.PubMed'){
 				//render pubmed template
 				_append('#pubmed', hit._source, '#publications');
