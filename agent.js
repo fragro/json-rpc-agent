@@ -119,16 +119,20 @@ var agent = (function() {
 		$('#loading').hide();
 	}
 
-	function parseSearchData(data){
-		console.log(data);
-		for(hit in data.hits.hits){
-			console.log(hit.fields);
-			if(hit._source._cls == 'Base.PubMed'){
-				//render pubmed template
-				_append('#pubmed', hit._source, '#publications');
-				stars('#star_pub_' + hit._source.pmc, 'pubid' + hit._source.pmc);
-			}
-		}
+	function parseSearchData(results){
+		var data = results.hits.hits;
+		if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    source = data[i].fields;
+					_append('#pubmed', source, '#publications');
+					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
+            }
+
+            $('#res').removeClass('text-error').addClass('text-success').html(content);
+        } else {
+            $('#res').removeClass('text-success').addClass('text-error').html('No results found.');
+    	}
+	}
 	}
 
     //private functions
