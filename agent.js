@@ -186,7 +186,7 @@ var agent = (function() {
 
 	function api() {
 		$.getJSON('http://localhost:9200/mongoindex/base/_search?q=keywords:' + this._search, 
-		  success: function(data) {
+		  function(data) {
 		  		console.log(data);
 		});
 	}
