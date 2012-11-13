@@ -119,6 +119,14 @@ var agent = (function() {
 		$('#loading').hide();
 	}
 
+	function parseSearchData(data){
+		for(hit in data.hits){
+			if(hit._source._cls == 'Base.PubMed'){
+				alert(hit._source.name);
+			}
+		}
+	}
+
     //private functions
     //successcallback for reccomendation
     function _appendRec(data, div){
@@ -187,7 +195,7 @@ var agent = (function() {
 	function api() {
 		$.getJSON('http://localhost:9200/mongoindex/base/_search?q=keywords:' + this._search, 
 		  function(data) {
-		  		console.log(data);
+		  		parseSearchData(data);
 		});
 	}
 
