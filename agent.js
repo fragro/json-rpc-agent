@@ -135,16 +135,15 @@ function agent(serviceUrl, options){
 		var data = results.hits.hits;
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
-            	console.log(data[i]._source);
                 source = data[i]._source;
 				if(source._cls == 'PubMed'){
 					_append('#pubmed', source, '#publications');
-					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
+					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
 				}
 				//ontology data
 				else if(source._cls == 'Base.Node'){
 					_render('#node', source, '#overview');
-					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
+					alert(source);
 				}
 				//aisle7 data
 				else if(source._cls == 'Base.Asset'){
