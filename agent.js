@@ -147,7 +147,15 @@ function agent(serviceUrl, options){
 				}
 				//aisle7 data
 				else if(source._cls == 'Base.Asset'){
-				
+					_render('#node', source, '#overview');
+					for(var ele in source.elements){
+						var s = {'name': ele.name, 'child': ''};
+						for(var sub in ele.relationships){
+							s['description'] += '<h4>' + sub.title  + '</h4>'
+						}
+						_append('#node', s, '#recommendations');
+
+					}
 				}
 				else{
 					console.log(source);
