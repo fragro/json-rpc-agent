@@ -149,6 +149,7 @@ function agent(serviceUrl, options){
 				else if(source._cls == 'Base.Asset'){
 					_render('#node', source, '#overview');
 					for(var i = 0; i < source.elements.length; i++){
+						console.log(source.elements[i]);
 						var s = {'name': source.elements[i].name, 'child': ''};
 						for(var j = 0; j < source.elements[i]['subElements'].length; i++){
 							s['description'] += '<h4>' + source.elements[i]['subElements'][j].title  + '</h4>'
