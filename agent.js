@@ -233,10 +233,10 @@ function agent(serviceUrl, options){
 		if (!('size' in options)){
 			options.size = 10;
 		}
-		d = {
+		var d = {
 			    "from" : options.from, "size" : options.size,
 			    "query" : {
-			        "term" : { options.field : options.query }
+			        "term" : { 'body' : options.query }
 			    }
 			}
 		var url = 'http://localhost:9200/' + options.index + '/' + options.type + '/_search'
