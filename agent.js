@@ -127,6 +127,7 @@ var agent = (function() {
                 	console.log(data[i]._source);
                     source = data[i]._source;
 					_append('#pubmed', source, '#publications');
+					$('#publications').append(source)
 					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
             	}
 
@@ -201,8 +202,9 @@ var agent = (function() {
 		});
 	}
 
-	function api() {
-		$.getJSON('http://localhost:9200/mongoindex/pubmed/_search?q=keywords:' + this._search, 
+	function api(index, type, search, query) {
+		var url = 'http://localhost:9200/' + index + '/' + type + '/_search?q=' + search + ':' + query
+		$.getJSON(url, 
 		  function(data) {
 		  		parseSearchData(data);
 		});
