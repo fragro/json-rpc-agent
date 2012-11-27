@@ -151,11 +151,11 @@ function agent(serviceUrl, options){
 					for(var i = 0; i < source.elements.length; i++){
 						var s = {'name': source.elements[i].name, 'child': ''};
 						var subE = source.elements[i].subElements;
-						for(var j = 0; j < subE.length; i++){
+						/*for(var j = 0; j < subE.length; i++){
 							s['description'] += '<h4>' + subE[j].title  + '</h4>'
-						}
+						}*/
 						console.log(s);
-						_append('#node', s, '#recommendations');
+						//_append('#node', s, '#recommendations');
 
 					}
 				}
