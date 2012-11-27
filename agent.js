@@ -141,6 +141,15 @@ function agent(serviceUrl, options){
 					_append('#pubmed', source, '#publications');
 					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
 				}
+				//ontology data
+				else if(source._cls == 'Base.Node'){
+					_render('#node', source, '#overview');
+					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
+				}
+				//aisle7 data
+				else if(source._cls == 'Base.Asset'){
+				
+				}
 				else{
 					console.log(source);
 				}
@@ -221,7 +230,7 @@ function agent(serviceUrl, options){
 	this.search = search;
 	function search(query){
 		this.api({'index': 'mongoindex', 'type': 'pubmed', 'query': query}, 'body');
-		this.api({'index': 'mongoindex', 'type': 'base', 'query': query}, 'keywords');
+		this.api({'index': 'mongoindex', 'type': 'base', 'query': query, 'size' : 1}, 'keywords');
 		this.api({'index': 'mongoindex', 'type': 'medline', 'query': query}, 'doc');
 	}
 
