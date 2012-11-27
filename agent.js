@@ -148,11 +148,12 @@ function agent(serviceUrl, options){
 				//aisle7 data
 				else if(source._cls == 'Base.Asset'){
 					_render('#node', source, '#overview');
-					for(var ele in source.elements){
-						var s = {'name': ele.name, 'child': ''};
-						for(var sub in ele.relationships){
-							s['description'] += '<h4>' + sub.title  + '</h4>'
+					for(var i = 0; i < source.elements.length; i++){
+						var s = {'name': source.elements[i].name, 'child': ''};
+						for(var j = 0; j < source.elements[i].subElements.length; i++){
+							s['description'] += '<h4>' + source.elements[i].subElements[j].title  + '</h4>'
 						}
+						console.log(s)
 						_append('#node', s, '#recommendations');
 
 					}
