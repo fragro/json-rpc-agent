@@ -218,10 +218,23 @@ function agent(serviceUrl, options){
 		});
 	}
 
+	this.search = search;
+	function search(query){
+		a.api('mongoindex', 'pubmed', 'body', query);
+		a.api('mongoindex', 'base', 'keywords', query);
+		a.api('mongoindex', 'base', 'doc', query);
+	}
+
 	this.api = api;
 	function api(index, type, search, query) {
-		var url = 'http://localhost:9200/' + index + '/' + type + '/_search?q=' + search + ':' + query
-		$.getJSON(url, 
+		d = {
+			    "from" : 0, "size" : 10,
+			    "query" : {
+			        "term" : { search : query }
+			    }
+			}
+		var url = 'http://localhost:9200/' + index + '/' + type + '/_search'
+		$.getJSON(url, d,
 		  function(data) {
 		  		parseSearchData(data);
 		});
