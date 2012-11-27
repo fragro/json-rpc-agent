@@ -241,15 +241,10 @@ function agent(serviceUrl, options){
 		if (options['size'] == undefined){
 			options['size'] = 10;
 		}
-		var d = {
-			    "from" : options['from'], "size" : options['size'],
-			    "query" : {
-			        "term" : { field : options['query']}
-			    }
-			}
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
+		url = url + '?q=' + field + ':' + options['query'] + '&size=' + options['size'] + '&from='  options['from']
 		console.log(url);
-		$.getJSON(url, d,
+		$.getJSON(url,
 		  function(data) {
 		  		parseSearchData(data);
 		});
