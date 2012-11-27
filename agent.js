@@ -233,13 +233,12 @@ var agent = (function() {
 	        //this.url = 'http://localhost:8080/jsonrpc';
 	        this._url = serviceUrl;
 	        this._userID = options.userID;
-	        this._search = options.search;
 	        this._type = 'database';
 			this.div = options.div;
 	        console.log(this);
 	        //initialized now subscribe the user to the service and grab recommendations
 	        //subscribe.call(this);
-	        api.call(this);
+	        //api.call(this);
 	    },
 	}
 })();
