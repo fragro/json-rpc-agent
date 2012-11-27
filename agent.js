@@ -236,4 +236,4 @@ function agent(serviceUrl, options){
 	}
 
 
-})();
+}
