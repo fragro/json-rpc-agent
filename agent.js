@@ -228,11 +228,12 @@ function agent(serviceUrl, options){
 	this.api = api;
 	function api(options, field) {
 		if (options['from'] == undefined){
-			options.from = 0;
+			options['from'] = 0;
 		}
 		if (options['size'] == undefined){
-			options.size = 10;
+			options['size'] = 10;
 		}
+		console.log(options);
 		var d = {
 			    "from" : options['from'], "size" : options['size'],
 			    "query" : {
