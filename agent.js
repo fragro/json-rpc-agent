@@ -242,7 +242,7 @@ function agent(serviceUrl, options){
 			options['size'] = 10;
 		}
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
-		url = url + '?q=' + field + ':' + options['query'] + '&size=' + options['size'] + '&from='  options['from']
+		url = url + '?q=' + field + ':' + options['query'] + '&size=' + options['size'] + '&from=' + options['from']
 		console.log(url);
 		$.getJSON(url,
 		  function(data) {
