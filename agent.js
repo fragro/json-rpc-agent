@@ -154,7 +154,12 @@ function agent(serviceUrl, options){
 						var subE = source.elements[k].subElements;
 						for(var j = 0; j < subE.length; j++){
 							console.log(subE[j]);
+							var rel = subE[j].relationships;
 							_append('#node', {'name': subE[j].title}, '#recommendations');
+							for(var l = 0; l < rel.length; l++){
+								_append('#smallnode', {'name': rel[l].title}, '#recommendations');
+
+							}
 						}
 						console.log(s);
 
