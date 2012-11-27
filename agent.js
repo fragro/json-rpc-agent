@@ -227,10 +227,10 @@ function agent(serviceUrl, options){
 
 	this.api = api;
 	function api(options, field) {
-		if (!('from' in options)){
+		if (options['from'] == undefined){
 			options.from = 0;
 		}
-		if (!('size' in options)){
+		if (options['size'] == undefined){
 			options.size = 10;
 		}
 		var d = {
