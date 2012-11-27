@@ -220,13 +220,13 @@ function agent(serviceUrl, options){
 
 	this.search = search;
 	function search(query){
-		a.api({'index': 'mongoindex', 'type': 'pubmed', 'field': 'body', 'query': query});
-		a.api({'index': 'mongoindex', 'type': 'base', 'field': 'keywords', 'query': query});
-		a.api({'index': 'mongoindex', 'type': 'medline', 'field': 'doc', 'query': query});
+		a.api({'index': 'mongoindex', 'type': 'pubmed', 'query': query}, 'body');
+		a.api({'index': 'mongoindex', 'type': 'base', 'query': query}, 'keywords');
+		a.api({'index': 'mongoindex', 'type': 'medline', 'query': query}, 'doc');
 	}
 
 	this.api = api;
-	function api(options) {
+	function api(options, field) {
 		if (!('from' in options)){
 			options.from = 0;
 		}
@@ -236,7 +236,7 @@ function agent(serviceUrl, options){
 		var d = {
 			    "from" : options.from, "size" : options.size,
 			    "query" : {
-			        "term" : { 'body' : options.query }
+			        "term" : { field : options.query }
 			    }
 			}
 		var url = 'http://localhost:9200/' + options.index + '/' + options.type + '/_search'
