@@ -228,15 +228,15 @@ function agent(serviceUrl, options){
 	this.api = api;
 	function api(options) {
 		if (!('from' in options)){
-			options.from = 0
+			options.from = 0;
 		}
 		if (!('size' in options)){
-			options.size = 10
+			options.size = 10;
 		}
 		d = {
 			    "from" : options.from, "size" : options.size,
 			    "query" : {
-			        "term" : { options.search : options.query }
+			        "term" : { options.field : options.query }
 			    }
 			}
 		var url = 'http://localhost:9200/' + options.index + '/' + options.type + '/_search'
