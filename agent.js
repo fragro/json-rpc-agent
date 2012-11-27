@@ -129,7 +129,7 @@ function agent(serviceUrl, options){
 		$('#loading').hide();
 	}
 
-	this._parseSearchData = _parseSearchData;
+	this.parseSearchData = parseSearchData;
 	function parseSearchData(results){
 		console.log(results);
 		var data = results.hits.hits;
