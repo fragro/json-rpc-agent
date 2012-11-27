@@ -154,7 +154,7 @@ function agent(serviceUrl, options){
 						for(var j = 0; j < subE.length; i++){
 							s['description'] += '<h4>' + subE[j].title  + '</h4>'
 						}
-						//_append('#node', s, '#recommendations');
+						_append('#node', s, '#recommendations');
 
 					}
 				}
