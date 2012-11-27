@@ -147,7 +147,7 @@ function agent(serviceUrl, options){
 				}
 				//aisle7 data
 				else if(source._cls == 'Base.Asset'){
-					_render('#node', source, '#overview');
+					//_render('#node', source, '#overview');
 					for(var i = 0; i < source.elements.length; i++){
 						var s = {'name': source.elements[i].name, 'child': ''};
 						var subE = source.elements[i].subElements;
