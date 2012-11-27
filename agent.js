@@ -150,13 +150,12 @@ function agent(serviceUrl, options){
 					//_render('#node', source, '#overview');
 					for(var k = 0; k < source.elements.length; k++){
 						var s = {'name': source.elements[k].name, 'child': ''};
-						_append('#node', s, '#recommendations');
+						//_append('#node', s, '#recommendations');
 						var subE = source.elements[k].subElements;
 						for(var j = 0; j < subE.length; j++){
 							_append('#node', {'name': subE[j].title}, '#recommendations');
 						}
 						console.log(s);
-						_append('#node', s, '#recommendations');
 
 					}
 				}
