@@ -220,20 +220,26 @@ function agent(serviceUrl, options){
 
 	this.search = search;
 	function search(query){
-		a.api('mongoindex', 'pubmed', 'body', query);
-		a.api('mongoindex', 'base', 'keywords', query);
-		a.api('mongoindex', 'base', 'doc', query);
+		a.api({'index': 'mongoindex', 'type': 'pubmed', 'field': 'body', 'query': query});
+		a.api({'index': 'mongoindex', 'type': 'base', 'field': 'keywords', 'query': query});
+		a.api({'index': 'mongoindex', 'type': 'medline', 'field': 'doc', 'query': query});
 	}
 
 	this.api = api;
-	function api(index, type, search, query) {
+	function api(options) {
+		if (!('from' in options)){
+			options.from = 0
+		}
+		if (!('size' in options)){
+			options.size = 10
+		}
 		d = {
-			    "from" : 0, "size" : 10,
+			    "from" : options.from, "size" : options.size,
 			    "query" : {
-			        "term" : { search : query }
+			        "term" : { options.search : options.query }
 			    }
 			}
-		var url = 'http://localhost:9200/' + index + '/' + type + '/_search'
+		var url = 'http://localhost:9200/' + options.index + '/' + options.type + '/_search'
 		$.getJSON(url, d,
 		  function(data) {
 		  		parseSearchData(data);
