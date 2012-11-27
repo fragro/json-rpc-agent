@@ -153,6 +153,7 @@ function agent(serviceUrl, options){
 						//_append('#node', s, '#recommendations');
 						var subE = source.elements[k].subElements;
 						for(var j = 0; j < subE.length; j++){
+							console.log(subE[j]);
 							_append('#node', {'name': subE[j].title}, '#recommendations');
 						}
 						console.log(s);
