@@ -73,16 +73,22 @@ $('#more').click( function() {
 	}
 })
 
-var agent = (function() {
-	var version = "0.1.0.1";
-	var debug =  true;
-	var div = '#recommendation';
-	var _url;
-	var _userID;
-	var that = this;
+function agent(serviceUrl, options){
+    this._url = serviceUrl;
+    this._userID = options.userID;
+    this._type = 'database';
+	this.div = options.div;
+    console.log(this);
+	this.version = "0.1.0.1";
+	this.debug =  true;
+	this.div = '#recommendation';
+	this.url;
+	this.userID;
+	this.that = this;
 
 
 	//rendering functions using mustache.js
+	this._render = _render;
 	function _render(template, data, render_to){
 	    var template = $(template).html();
 	    var html = Mustache.to_html(template, data);
@@ -90,12 +96,14 @@ var agent = (function() {
 	}
 
 	//rendering functions using mustache.js
+	this._append = _append;
 	function _append(template, data, render_to){
 	    var template = $(template).html();
 	    var html = Mustache.to_html(template, data);
 	    $(render_to).append(html);
 	}
 
+	this._alert = _alert;
 	function _alert(title, text){
 		var data = {
 			title: title,
@@ -105,6 +113,7 @@ var agent = (function() {
 		_render('#alert', data, '#alert_box');
 	}
 
+	this._warning = _warning;
 	function _warning(title, text){
 		var data = {
 			title: title,
@@ -114,11 +123,13 @@ var agent = (function() {
 	}
 
 	//this function is called after we have successfully completed a transaction
+	this._cleanup = _cleanup;
 	function _cleanup(){
 		$('#alert_box').html('');
 		$('#loading').hide();
 	}
 
+	this._parseSearchData = _parseSearchData;
 	function parseSearchData(results){
 		console.log(results);
 		var data = results.hits.hits;
@@ -139,6 +150,7 @@ var agent = (function() {
 
     //private functions
     //successcallback for reccomendation
+	this._appendRec = _appendRec;
     function _appendRec(data, div){
     	if(data.result.results.length == 0){
     		//render waiting
@@ -163,7 +175,7 @@ var agent = (function() {
 	    _cleanup();
 
     }
-
+	this._send_request = _send_request;
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(options.url);
@@ -190,7 +202,7 @@ var agent = (function() {
 		console.log(JSON.stringify(err));
 	}
 
-
+	this.subscribe = subscribe;
 	function subscribe() {
 		_send_request({
 			div: this.div, 
@@ -202,6 +214,7 @@ var agent = (function() {
 		});
 	}
 
+	this.api = api;
 	function api(index, type, search, query) {
 		var url = 'http://localhost:9200/' + index + '/' + type + '/_search?q=' + search + ':' + query
 		$.getJSON(url, 
@@ -210,7 +223,7 @@ var agent = (function() {
 		});
 	}
 
-
+	this.rate = rate;
 	function rate(indexkey, rating) {
 		_send_request({
 			div: this.div, 
@@ -222,23 +235,5 @@ var agent = (function() {
 		});
 	}
 
-	return {
-		//public functions
-		subscribe: subscribe,
-		api: api,
-		rate: rate,
-	    init: function (serviceUrl, options) {
-			//we need to support cross-domain requests since this is loaded on nutraspace server.
-			//need to test extensively on IE
-	        //this.url = 'http://localhost:8080/jsonrpc';
-	        this._url = serviceUrl;
-	        this._userID = options.userID;
-	        this._type = 'database';
-			this.div = options.div;
-	        console.log(this);
-	        //initialized now subscribe the user to the service and grab recommendations
-	        //subscribe.call(this);
-	        //api.call(this);
-	    },
-	}
+
 })();
