@@ -202,7 +202,7 @@ var agent = (function() {
 	}
 
 	function api() {
-		$.getJSON('http://localhost:9200/mongoindex/base/_search?q=keywords:' + this._search, 
+		$.getJSON('http://localhost:9200/mongoindex/pubmed/_search?q=keywords:' + this._search, 
 		  function(data) {
 		  		parseSearchData(data);
 		});
