@@ -151,6 +151,8 @@ function agent(serviceUrl, options){
 					for(var i = 0; i < source.elements.length; i++){
 						console.log(source.elements[i]);
 						var s = {'name': source.elements[i].name, 'child': ''};
+						console.log(source.elements[i].subElements);
+						console.log(source.elements[i]['subElements']);
 						for(var j = 0; j < source.elements[i].subElements.length; i++){
 							s['description'] += '<h4>' + source.elements[i]['subElements'][j].title  + '</h4>'
 						}
