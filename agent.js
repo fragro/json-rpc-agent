@@ -241,7 +241,6 @@ function agent(serviceUrl, options){
 		if (options['size'] == undefined){
 			options['size'] = 10;
 		}
-		console.log(options);
 		var d = {
 			    "from" : options['from'], "size" : options['size'],
 			    "query" : {
@@ -249,6 +248,7 @@ function agent(serviceUrl, options){
 			    }
 			}
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
+		console.log(url);
 		$.getJSON(url, d,
 		  function(data) {
 		  		parseSearchData(data);
