@@ -234,12 +234,12 @@ function agent(serviceUrl, options){
 			options.size = 10;
 		}
 		var d = {
-			    "from" : options.from, "size" : options.size,
+			    "from" : options['from'], "size" : options['size'],
 			    "query" : {
-			        "term" : { field : options.query }
+			        "term" : { field : options['query']}
 			    }
 			}
-		var url = 'http://localhost:9200/' + options.index + '/' + options.type + '/_search'
+		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
 		$.getJSON(url, d,
 		  function(data) {
 		  		parseSearchData(data);
