@@ -134,13 +134,17 @@ function agent(serviceUrl, options){
 		console.log(results);
 		var data = results.hits.hits;
 		if (data.length > 0) {
-                for (var i = 0; i < data.length; i++) {
-                	console.log(data[i]._source);
-                    source = data[i]._source;
+            for (var i = 0; i < data.length; i++) {
+            	console.log(data[i]._source);
+                source = data[i]._source;
+				if(source._cls == 'PubMed'){
 					_append('#pubmed', source, '#publications');
-					$('#publications').append(source)
 					stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
-            	}
+				}
+				else{
+					console.log(source);
+				}
+        	}
 
             //$('#res').removeClass('text-error').addClass('text-success').html(content);
         } else {
