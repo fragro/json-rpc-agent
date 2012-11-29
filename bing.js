@@ -42,7 +42,7 @@ function ReceiveAndShowResults(query) {
         success: OnResultsReceived,
 		error: OnError,
 		dataType: 'jsonp',
-	 	jsonpCallback: 'mycallback'
+	 	jsonpCallback: 'OnResultsReceived'
      });           
 }
 
