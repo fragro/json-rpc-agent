@@ -4,7 +4,7 @@
 * generates recommendations on the fly as the user requests more. Optionally the user can interact with the
 * agent, sending back ratings or other types of feedback which in turn drives a collaborative filtering process.
 */
-
+window.hits = {};
 window.urlCount = 0;
 window.requestCount = 0;
 window.curDiv = '';
@@ -85,7 +85,6 @@ function agent(serviceUrl, options){
 	this.url;
 	this.userID;
 	this.that = this;
-	this.hits = {};
 	this.evalhits = [['asset', '#href_Asset']];
 
 	//rendering functions using mustache.js
@@ -201,7 +200,7 @@ function agent(serviceUrl, options){
 	function parseSearchData(results, type){
 		console.log(results);
 		var data = results.hits.hits;
-  		this.hits[type] = data.length;
+  		window.hits[type] = data.length;
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
