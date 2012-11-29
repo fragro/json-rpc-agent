@@ -10,10 +10,6 @@ window.requestCount = 0;
 window.curDiv = '';
 window.retries = 0;
 
-String.prototype.toProperCase = function () {
-    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-};
-
 function stars(div, id){
 	$(div).raty({
 	  path: '',
@@ -194,11 +190,6 @@ function agent(serviceUrl, options){
 				}
 			}
 		}
-		source['toProperCase']  = function() {
-								    return function(text, render) {
-								      return render(text.toProperCase());
-								    }
-							   }
 		return source;
 	}
 
@@ -256,6 +247,8 @@ function agent(serviceUrl, options){
 		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
 		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 		api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
+		//get bing image results
+		ReceiveAndShowResults(query);
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
 	}	
