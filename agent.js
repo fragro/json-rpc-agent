@@ -85,7 +85,8 @@ function agent(serviceUrl, options){
 	this.url;
 	this.userID;
 	this.that = this;
-
+	this.hits = {};
+	this.evalhits = [['asset', '#href_Asset']];
 
 	//rendering functions using mustache.js
 	this._render = _render;
@@ -127,24 +128,6 @@ function agent(serviceUrl, options){
 	function _cleanup(){
 		$('#alert_box').html('');
 		$('#loading').hide();
-	}
-
-	this.parseSearchData = parseSearchData;
-	function parseSearchData(results){
-		console.log(results);
-		var data = results.hits.hits;
-		if (data.length > 0) {
-            for (var i = 0; i < data.length; i++) {
-            	console.log(data[i]);
-                source = data[i]._source;
-				_append('#' + source._cls, source, '#sink_' + source._cls);
-					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
-        	}
-
-            //$('#res').removeClass('text-error').addClass('text-success').html(content);
-        } else {
-            //$('#res').removeClass('text-success').addClass('text-error').html('No results found.');
-    	}
 	}
 
     //private functions
@@ -213,13 +196,44 @@ function agent(serviceUrl, options){
 		});
 	}
 
+
+	this.parseSearchData = parseSearchData;
+	function parseSearchData(results){
+		console.log(results);
+		var data = results.hits.hits;
+		if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+            	console.log(data[i]);
+                source = data[i]._source;
+				_append('#' + source._cls, source, '#sink_' + source._cls);
+					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
+        	}
+
+            //$('#res').removeClass('text-error').addClass('text-success').html(content);
+        } else {
+            //$('#res').removeClass('text-success').addClass('text-error').html('No results found.');
+    	}
+	}
+
 	this.search = search;
 	function search(query){
-		this.api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
+		//refresh hits
+		this.hits = {};
 		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 1});
 		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+		this.api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 		this.api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
-	}
+		//if assets didn't return general inforemation, use the medline.
+		//If that is unavailable inform the user
+		for(var eval in this.evalhits){
+			if(this.hits[eval[0]] !== 0){
+				$(eval[1]).addClass('disabled');
+			}
+			else{
+				$(eval[1]).removeClass('disabled');
+			}
+		}
+	}	
 
 	this.api = api;
 	function api(options, field, kwargs) {
@@ -236,6 +250,9 @@ function agent(serviceUrl, options){
 		console.log(url);
 		$.getJSON(url,
 		  function(data) {
+		  		//record hits
+		  		this.hits[options['type']] = data.hits.hits.length;
+		  		//appends the search data
 		  		parseSearchData(data);
 		});
 	}
