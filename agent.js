@@ -195,7 +195,7 @@ function agent(serviceUrl, options){
 			}
 		}
 		source['toProperCase']  = function() {
-								    return function(text) {
+								    return function(text, render) {
 								      return render(text.toProperCase());
 								    }
 							   }
