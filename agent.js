@@ -172,9 +172,9 @@ function agent(serviceUrl, options){
 
 
     //test callback functions for debugging
-	function _append_images(data) {
+	function _append_images(data, div) {
 	    _cleanup();
-		console.log(JSON.stringify(data.responseText.result.results.d.results));
+		console.log(JSON.stringify(data.result.results.d.results));
 	}
 
     //test callback functions for debugging
@@ -218,7 +218,7 @@ function agent(serviceUrl, options){
 			url: _url,
 			method: 'image', 
 			params: [query], 
-			successcall: _successCallback, 
+			successcall: _append_images, 
 			errorcall: _errorCallback
 		});
 	}
