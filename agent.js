@@ -224,7 +224,7 @@ function agent(serviceUrl, options){
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
-			$('#sink_tab_' + source._cls + ' > #related_search').click( function(){
+			$('#sink_tab_' + source._cls + ' a#related_search').click( function(){
 				search($(this).html());
 			});	
             //$('#res').removeClass('text-error').addClass('text-success').html(content);
