@@ -40,7 +40,8 @@ function ReceiveAndShowResults(query) {
     $.ajax({
         url: bingUri,
         success: OnResultsReceived,
-		error: OnError
+		error: OnError,
+		jsonp:true
      });           
 }
 
