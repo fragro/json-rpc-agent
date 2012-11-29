@@ -175,8 +175,8 @@ function agent(serviceUrl, options){
 	function _append_images(data, div) {
 	    _cleanup();
 	    var r = data.result.results.d.results;
-		console.log(JSON.stringify(data.result.results.d.results));
 		for(var i in r){
+			console.log(r[i]);
 		    var template = $('#image').html();
 		    var html = Mustache.to_html(template, r[i]);
 		    $(div).append(html);
