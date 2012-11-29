@@ -233,15 +233,6 @@ function agent(serviceUrl, options){
 		this.api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
-		for(var eval in this.evalhits){
-			if(window.hits[this.evalhits[eval][0]] !== 0){
-				console.log(this.evalhits[eval][1]);
-				$(this.evalhits[eval][1]).addClass('disabled');
-			}
-			else{
-				$(this.evalhits[eval][1]).removeClass('disabled');
-			}
-		}
 	}	
 
 	this.api = api;
