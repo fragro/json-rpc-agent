@@ -137,7 +137,7 @@ function agent(serviceUrl, options){
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
                 source = data[i]._source;
-				_append('#' + source._cls, source, '#publications');
+				_append('#' + source._cls, source, '#sink_' + source._cls);
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
 
