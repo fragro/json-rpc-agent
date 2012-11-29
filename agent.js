@@ -73,7 +73,7 @@ $('#more').click( function() {
 })
 
 function agent(serviceUrl, options){
-    this._url = serviceUrl;
+    _url = serviceUrl;
     this._userID = options.userID;
     this._type = 'database';
 	this.div = options.div;
@@ -209,7 +209,7 @@ function agent(serviceUrl, options){
 	function grab_images(query) {
 		_send_request({
 			div: "#image_results", 
-			url: this._url,
+			url: _url,
 			method: 'image', 
 			params: [query], 
 			successcall: _successCallback, 
