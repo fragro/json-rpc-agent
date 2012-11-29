@@ -183,6 +183,17 @@ function agent(serviceUrl, options){
 		console.log(JSON.stringify(err));
 	}
 
+	function _process(source){
+		for(var i in source.more_info){
+			for(var key in source.more_info[i]){
+				if(source[key] == undefined){
+					source[key] = source.more_info[i][key];
+				}
+			}
+		}
+		return source;
+	}
+
 	this.subscribe = subscribe;
 	function subscribe() {
 		_send_request({
@@ -204,7 +215,7 @@ function agent(serviceUrl, options){
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
-                source = data[i]._source;
+                source = _process(data[i]._source);
 				_append('#' + source._cls, source, '#sink_' + source._cls);
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
