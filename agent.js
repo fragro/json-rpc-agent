@@ -10,6 +10,9 @@ window.requestCount = 0;
 window.curDiv = '';
 window.retries = 0;
 
+String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
 
 function stars(div, id){
 	$(div).raty({
@@ -191,7 +194,11 @@ function agent(serviceUrl, options){
 				}
 			}
 		}
-		return source;
+		source['toProperCase']  = function() {
+								    return function(text) {
+								      return render(text.toProperCase());
+								    }
+		return source;e
 	}
 
 	this.subscribe = subscribe;
@@ -270,7 +277,7 @@ function agent(serviceUrl, options){
 	  		//record hits
 	  		//appends the search data
 	  		parseSearchData(data, options['type']);
-  			//need to find a beeter place for this
+  			//should convert each type into a priority queue and move them up appropriately
 	  		if(options['type'] == 'asset' && data.hits.hits == 0){
 	  			$('#sink_MedLine').appendTo('#sink_Asset');
 	  			$('#sink_MedLine').removeClass('tab-pane');
