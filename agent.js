@@ -223,6 +223,8 @@ function agent(serviceUrl, options){
 
 	this.api = api;
 	function api(options, field, kwargs) {
+		//not required
+		if(kwargs == undefined){kwargs={}};
 		if (kwargs['from'] == undefined){
 			kwargs['from'] = 0;
 		}
