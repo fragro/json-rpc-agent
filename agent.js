@@ -218,7 +218,6 @@ function agent(serviceUrl, options){
 	this.search = search;
 	function search(query){
 		//refresh hits
-		this.hits = {};
 		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 1});
 		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
 		this.api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
