@@ -234,12 +234,12 @@ function agent(serviceUrl, options){
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
 		for(var eval in this.evalhits){
-			if(window.hits[eval[0]] !== 0){
-				console.log(eval);
-				$(eval[1]).addClass('disabled');
+			if(window.hits[this.evalhits[eval][0]] !== 0){
+				console.log(this.evalhits[eval][1]);
+				$(this.evalhits[eval][1]).addClass('disabled');
 			}
 			else{
-				$(eval[1]).removeClass('disabled');
+				$(this.evalhits[eval][1]).removeClass('disabled');
 			}
 		}
 	}	
