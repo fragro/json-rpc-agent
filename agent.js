@@ -272,8 +272,12 @@ function agent(serviceUrl, options){
 		  		if(options['type'] == 'asset' && data.hits.hits == 0){
 		  			$('#sink_MedLine').appendTo('#sink_Asset');
 		  			$('#sink_MedLine').removeClass('tab-pane');
-		  			$('#href_MedLine').remove()
+		  			$('#href_MedLine').remove();
 				}
+	  			//need to find a beeter place for this
+		  		$('#related_search').click( function(){
+					a.search($(this).html());
+	  			});	
 		});
 	}
 
