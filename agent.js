@@ -162,13 +162,20 @@ function agent(serviceUrl, options){
 		$('#loading').show();
          $.ajax({
             url: options.url, 
-            dataType: 'jsonp',
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
+            dataType:"json",
             success:  function (data) {console.log(data);  options.successcall(data, options.div); },
             error: function (err)  { options.errorcall(err); }
      	});
     }
+
+
+    //test callback functions for debugging
+	function _append_images(data) {
+	    _cleanup();
+		console.log(JSON.stringify(data.responseText.result.results.d.results));
+	}
 
     //test callback functions for debugging
 	function _successCallback(data) {
