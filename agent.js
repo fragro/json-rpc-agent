@@ -229,7 +229,7 @@ function agent(serviceUrl, options){
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
 		for(var eval in this.evalhits){
-			if(this.hits[eval[0]] !== 0){
+			if(window.hits[eval[0]] !== 0){
 				$(eval[1]).addClass('disabled');
 			}
 			else{
