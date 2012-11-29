@@ -264,6 +264,11 @@ function agent(serviceUrl, options){
 		  		//record hits
 		  		//appends the search data
 		  		parseSearchData(data, options['type']);
+		  		if(options['type'] == 'asset' && data.hits.hits == 0){
+		  			$('#sink_MedLine').appendTo('#sink_Asset');
+		  			$('#sink_MedLine').removeClass('tab-pane');
+		  			$('#href_MedLine').remove()
+				}
 		});
 	}
 
