@@ -216,7 +216,12 @@ function agent(serviceUrl, options){
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
                 source = _process(data[i]._source);
-				_append('#' + source._cls, source, '#sink_' + source._cls);
+            	if(i != 0 && source._cls == 'Node' || i != 0 && source._cls == 'Asset'){
+					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
+            	}
+            	else{
+					_append('#' + source._cls, source, '#sink_' + source._cls);
+            	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
 
@@ -238,8 +243,8 @@ function agent(serviceUrl, options){
 		});		
 		//setup complete. search!
 		console.log(this);
-		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 1});
-		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
+		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 10});
 		this.api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 		this.api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
 		//if assets didn't return general inforemation, use the medline.
