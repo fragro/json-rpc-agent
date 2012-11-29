@@ -93,7 +93,7 @@ function BuildBingApiUri(query, offset) {
 				"?AppId=" + bingApiAppId +
 				"&Sources=image" +
 				"&Query=" + query +
-				"&Image.Count=" + bingApiImageCount +
+				"&Image.Count=" + bingApiImageCount
 					
     return s;                
 }
