@@ -198,7 +198,8 @@ function agent(serviceUrl, options){
 								    return function(text) {
 								      return render(text.toProperCase());
 								    }
-		return source;e
+							   }
+		return source;
 	}
 
 	this.subscribe = subscribe;
