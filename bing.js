@@ -41,7 +41,7 @@ function ReceiveAndShowResults(query) {
         url: bingUri,
         success: OnResultsReceived,
 		error: OnError,
-		jsonp:true
+		dataType: 'jsonp'
      });           
 }
 
@@ -49,7 +49,7 @@ function OnError(XMLHttpRequest, textStatus, errorThrown) {
 	//Show an error when the API call fails.
     $("#Results").append("<tr><td>Something went wrong..</td></tr>");	
 	$("#Results").append("<tr><td>" + textStatus + "</td></tr>");	
-	$("#Results").append("<tr><td>" + errorThrown + "</td></tr>");	
+	$("#Results").append("<tr><td>" + errorThrown + "</td></tr>");
 
 }
 
