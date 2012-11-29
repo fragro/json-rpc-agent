@@ -178,7 +178,7 @@ function agent(serviceUrl, options){
 		console.log(JSON.stringify(data.result.results.d.results));
 		for(var i in r){
 		    var template = $('#image').html();
-		    var html = Mustache.to_html(template, data);
+		    var html = Mustache.to_html(template, r[i]);
 		    $(div).append(html);
 		}
 	}
