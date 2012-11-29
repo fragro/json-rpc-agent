@@ -224,7 +224,9 @@ function agent(serviceUrl, options){
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
-
+			$('#sink_tab_' + source._cls + ' > #related_search').click( function(){
+				search($(this).html());
+			});	
             //$('#res').removeClass('text-error').addClass('text-success').html(content);
         } else {
             //$('#res').removeClass('text-success').addClass('text-error').html('No results found.');
@@ -248,9 +250,6 @@ function agent(serviceUrl, options){
 		api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
-  		$('#related_search').click( function(){
-			search($(this).html());
-		});	
 	}	
 
 	this.api = api;
@@ -268,15 +267,15 @@ function agent(serviceUrl, options){
 		console.log(url);
 		$.getJSON(url,
 		  function(data) {
-		  		//record hits
-		  		//appends the search data
-		  		parseSearchData(data, options['type']);
-		  		if(options['type'] == 'asset' && data.hits.hits == 0){
-		  			$('#sink_MedLine').appendTo('#sink_Asset');
-		  			$('#sink_MedLine').removeClass('tab-pane');
-		  			$('#href_MedLine').remove();
-				}
-	  			//need to find a beeter place for this
+	  		//record hits
+	  		//appends the search data
+	  		parseSearchData(data, options['type']);
+  			//need to find a beeter place for this
+	  		if(options['type'] == 'asset' && data.hits.hits == 0){
+	  			$('#sink_MedLine').appendTo('#sink_Asset');
+	  			$('#sink_MedLine').removeClass('tab-pane');
+	  			$('#href_MedLine').remove();
+			}
 		});
 	}
 
