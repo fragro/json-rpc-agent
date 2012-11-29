@@ -36,13 +36,10 @@ function ReceiveAndShowResults(query) {
 	//Build a new API uri.
     var bingUri = BuildBingApiUri(query, _offset);		
 	
-	//Make the API call.		
-    $.ajax({
-        url: bingUri,
-        success: OnResultsReceived,
-		error: OnError,
-		dataType: 'jsonp'
-     });           
+	$.getJSON(bingUri, function(data, textStatus){
+	    OnResultsReceived(data, textStatus);
+	});
+       
 }
 
 function OnError(XMLHttpRequest, textStatus, errorThrown) {
