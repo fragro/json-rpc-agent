@@ -217,10 +217,15 @@ function agent(serviceUrl, options){
 
 	this.search = search;
 	function search(query){
-		//reset
+		//reset and setup tabbing
 		var template = $('#Basic').html();
 	    var html = Mustache.to_html(template, {});
-	    $('#content').append(html);
+	    $('#content').html(html);
+	  	$('#myTab a').click(function (e) {
+				  e.preventDefault();
+				  $(this).tab('show');
+		});		
+		//setup complete. search!
 		console.log(this);
 		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 1});
 		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
