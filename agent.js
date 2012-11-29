@@ -215,10 +215,10 @@ function agent(serviceUrl, options){
 
 	this.search = search;
 	function search(query){
-		this.api({'index': 'mongoindex', 'type': 'pubmed', 'query': query}, 'body');
-		this.api({'index': 'mongoindex', 'type': 'base', 'query': query}, 'keywords', {'size' : 1});
-		this.api({'index': 'mongoindex', 'type': 'base', 'query': query}, 'keywords', {'size' : 1});
-		this.api({'index': 'mongoindex', 'type': 'medline', 'query': query}, 'doc');
+		this.api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
+		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 1});
+		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+		this.api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
 	}
 
 	this.api = api;
