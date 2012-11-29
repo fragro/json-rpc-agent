@@ -235,6 +235,7 @@ function agent(serviceUrl, options){
 		//If that is unavailable inform the user
 		for(var eval in this.evalhits){
 			if(window.hits[eval[0]] !== 0){
+				console.log(eval);
 				$(eval[1]).addClass('disabled');
 			}
 			else{
