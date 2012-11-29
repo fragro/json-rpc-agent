@@ -226,13 +226,13 @@ function agent(serviceUrl, options){
 		//not required
 		if(kwargs == undefined){kwargs={}};
 		if (kwargs['from'] == undefined){
-			options['from'] = 0;
+			kwargs['from'] = 0;
 		}
 		if (kwargs['size'] == undefined){
-			options['size'] = 10;
+			kwargs['size'] = 10;
 		}
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
-		url = url + '?q=' + field + ':' + options['query'] + '&size=' + options['size'] + '&from=' + options['from']
+		url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
 		$.getJSON(url,
 		  function(data) {
