@@ -137,37 +137,8 @@ function agent(serviceUrl, options){
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]._source);
                 source = data[i]._source;
-				if(source._cls == 'PubMed'){
-					_append('#pubmed', source, '#publications');
+				_append('#pubmed', source, '#publications');
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
-				}
-				//ontology data
-				else if(source._cls == 'Base.Node'){
-					_render('#node', source, '#overview');
-				}
-				//aisle7 data
-				else if(source._cls == 'Base.Asset'){
-					//_render('#node', source, '#overview');
-					for(var k = 0; k < source.elements.length; k++){
-						var s = {'name': source.elements[k].name, 'child': ''};
-						//_append('#node', s, '#recommendations');
-						var subE = source.elements[k].subElements;
-						for(var j = 0; j < subE.length; j++){
-							console.log(subE[j]);
-							var rel = subE[j].relationships;
-							_append('#node', {'name': subE[j].title}, '#recommendations');
-							for(var l = 0; l < rel.length; l++){
-								_append('#smallnode', {'name': rel[l].title}, '#recommendations');
-
-							}
-						}
-						console.log(s);
-
-					}
-				}
-				else{
-					console.log(source);
-				}
         	}
 
             //$('#res').removeClass('text-error').addClass('text-success').html(content);
@@ -245,12 +216,13 @@ function agent(serviceUrl, options){
 	this.search = search;
 	function search(query){
 		this.api({'index': 'mongoindex', 'type': 'pubmed', 'query': query}, 'body');
-		this.api({'index': 'mongoindex', 'type': 'base', 'query': query, 'size' : 1}, 'keywords');
+		this.api({'index': 'mongoindex', 'type': 'base', 'query': query}, 'keywords', {'size' : 1});
+		this.api({'index': 'mongoindex', 'type': 'base', 'query': query}, 'keywords', {'size' : 1});
 		this.api({'index': 'mongoindex', 'type': 'medline', 'query': query}, 'doc');
 	}
 
 	this.api = api;
-	function api(options, field) {
+	function api(options, field, kwargs) {
 		if (options['from'] == undefined){
 			options['from'] = 0;
 		}
