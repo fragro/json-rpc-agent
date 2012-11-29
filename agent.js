@@ -165,7 +165,6 @@ function agent(serviceUrl, options){
             dataType: 'jsonp',
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
             type:"POST",
-            dataType:"json",
             success:  function (data) {console.log(data);  options.successcall(data, options.div); },
             error: function (err)  { options.errorcall(err); }
      	});
