@@ -38,10 +38,11 @@ function ReceiveAndShowResults(query) {
 	
 	//Make the API call.		
     $.ajax({
-        url: ,
-        success: ,
+        url: bingUri,
+        success: OnResultsReceived,
 		error: OnError,
 		dataType: 'jsonp',
+	 	jsonpCallback: 'mycallback'
      });           
 }
 
