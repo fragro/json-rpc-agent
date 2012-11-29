@@ -37,6 +37,7 @@ function ReceiveAndShowResults(query) {
     var bingUri = BuildBingApiUri(query, _offset);		
 	
 	$.getJSON(bingUri, function(data, textStatus){
+		console.log(data);
 	    OnResultsReceived(data, textStatus);
 	});
        
