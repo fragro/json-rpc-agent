@@ -248,6 +248,9 @@ function agent(serviceUrl, options){
 		api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
+  		$('#related_search').click( function(){
+				search($(this).html());
+		});	
 	}	
 
 	this.api = api;
@@ -274,9 +277,6 @@ function agent(serviceUrl, options){
 		  			$('#href_MedLine').remove();
 				}
 	  			//need to find a beeter place for this
-		  		$('#related_search').click( function(){
-					search($(this).html());
-	  			});	
 		});
 	}
 
