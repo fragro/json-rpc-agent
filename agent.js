@@ -198,9 +198,10 @@ function agent(serviceUrl, options){
 
 
 	this.parseSearchData = parseSearchData;
-	function parseSearchData(results){
+	function parseSearchData(results, type){
 		console.log(results);
 		var data = results.hits.hits;
+  		this.hits[type] = data.length;
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
@@ -251,9 +252,8 @@ function agent(serviceUrl, options){
 		$.getJSON(url,
 		  function(data) {
 		  		//record hits
-		  		this.hits[options['type']] = data.hits.hits.length;
 		  		//appends the search data
-		  		parseSearchData(data);
+		  		parseSearchData(data, options['type']);
 		});
 	}
 
