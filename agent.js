@@ -223,11 +223,11 @@ function agent(serviceUrl, options){
 
 	this.api = api;
 	function api(options, field, kwargs) {
-		if (options['from'] == undefined){
-			options['from'] = 0;
+		if (kwargs['from'] == undefined){
+			kwargs['from'] = 0;
 		}
-		if (options['size'] == undefined){
-			options['size'] = 10;
+		if (kwargs['size'] == undefined){
+			kwargs['size'] = 10;
 		}
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
 		url = url + '?q=' + field + ':' + options['query'] + '&size=' + options['size'] + '&from=' + options['from']
