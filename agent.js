@@ -276,7 +276,7 @@ function agent(serviceUrl, options){
 				}
 	  			//need to find a beeter place for this
 		  		$('#related_search').click( function(){
-					a.search($(this).html());
+					search($(this).html());
 	  			});	
 		});
 	}
