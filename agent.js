@@ -258,8 +258,8 @@ function agent(serviceUrl, options){
 		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
 		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 		api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
+		grab_images(query);
 		//get bing image results
-		ReceiveAndShowResults(query);
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
 	}	
