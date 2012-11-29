@@ -174,7 +174,13 @@ function agent(serviceUrl, options){
     //test callback functions for debugging
 	function _append_images(data, div) {
 	    _cleanup();
+	    var r = data.result.results.d.results;
 		console.log(JSON.stringify(data.result.results.d.results));
+		for(var i in r){
+		    var template = $('#image').html();
+		    var html = Mustache.to_html(template, data);
+		    $(div).append(html);
+		}
 	}
 
     //test callback functions for debugging
