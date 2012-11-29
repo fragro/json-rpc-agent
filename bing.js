@@ -36,11 +36,13 @@ function ReceiveAndShowResults(query) {
 	//Build a new API uri.
     var bingUri = BuildBingApiUri(query, _offset);		
 	
-	$.getJSON(bingUri, function(data, textStatus){
-		console.log(data);
-	    OnResultsReceived(data, textStatus);
-	});
-       
+	//Make the API call.		
+    $.ajax({
+        url: ,
+        success: ,
+		error: OnError,
+		dataType: 'jsonp',
+     });           
 }
 
 function OnError(XMLHttpRequest, textStatus, errorThrown) {
@@ -91,6 +93,7 @@ function BuildBingApiUri(query, offset) {
 				"&Sources=image" +
 				"&Query=" + query +
 				"&Image.Count=" + bingApiImageCount +
-				"&JsonType=callback&JsonCallback=OnResultsReceived"					
+				"&Image.Offset=" + offset;
+					
     return s;                
 }
