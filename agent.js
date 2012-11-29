@@ -242,11 +242,10 @@ function agent(serviceUrl, options){
 				  $(this).tab('show');
 		});		
 		//setup complete. search!
-		console.log(this);
-		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
-		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 10});
-		this.api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
-		this.api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
+		api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
+		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 10});
+		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
+		api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
 	}	
