@@ -205,6 +205,17 @@ function agent(serviceUrl, options){
 		});
 	}
 
+	this.subscribe = subscribe;
+	function grab_images(query) {
+		_send_request({
+			div: this.div, 
+			url: this._url,
+			method: 'image', 
+			params: [query], 
+			successcall: _successCallback, 
+			errorcall: _errorCallback
+		});
+	}
 
 	this.parseSearchData = parseSearchData;
 	function parseSearchData(results, type){
