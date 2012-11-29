@@ -205,10 +205,10 @@ function agent(serviceUrl, options){
 		});
 	}
 
-	this.subscribe = subscribe;
+	this.grab_images = grab_images;
 	function grab_images(query) {
 		_send_request({
-			div: this.div, 
+			div: "#image_results", 
 			url: this._url,
 			method: 'image', 
 			params: [query], 
