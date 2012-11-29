@@ -249,7 +249,7 @@ function agent(serviceUrl, options){
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
   		$('#related_search').click( function(){
-				search($(this).html());
+			search($(this).html());
 		});	
 	}	
 
