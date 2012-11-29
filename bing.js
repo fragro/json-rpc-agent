@@ -91,7 +91,6 @@ function BuildBingApiUri(query, offset) {
 				"&Sources=image" +
 				"&Query=" + query +
 				"&Image.Count=" + bingApiImageCount +
-				"&Image.Offset=" + offset;
-					
+				"&JsonType=callback&JsonCallback=OnResultsReceived"					
     return s;                
 }
