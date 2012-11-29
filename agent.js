@@ -217,7 +217,10 @@ function agent(serviceUrl, options){
 
 	this.search = search;
 	function search(query){
-		//refresh hits
+		//reset
+		var template = $('#Basic').html();
+	    var html = Mustache.to_html(template, {});
+	    $('#content').append(html);
 		console.log(this);
 		this.api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 1});
 		this.api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
