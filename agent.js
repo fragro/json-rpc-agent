@@ -245,15 +245,7 @@ function agent(serviceUrl, options){
 					_append('#' + source._cls, source, '#sink_' + source._cls);
             	}
             	if(source._cls == 'RX'){
-				 	$('#' + source._id + 'modal').modal({
-				        backdrop: true,
-				        keyboard: true
-				    }).css({
-				        width: 'auto',
-				        'margin-left': function () {
-				            return -($(this).width() / 2);
-				        }
-				    });
+
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
