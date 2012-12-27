@@ -263,7 +263,7 @@ function agent(serviceUrl, options){
 					});
 				}
 				if(source._cls == 'RX'){
-					if(i%4 == 0 && i != 0){
+					if((i+1)%3 == 0 && i != 1){
 						_append('#endrow', {}, '#sink_RX');
 					} 
 					$('#' + source.med_id + '0').find('.Section').each(function(i,e){
