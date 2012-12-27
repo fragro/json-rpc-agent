@@ -261,7 +261,7 @@ function agent(serviceUrl, options){
 			           		return ($(document).height() * .85) + 'px';  
 				       }
 					});
-					$('#' + source._id + '0').find('.Section').each(function(i,e){
+					$('#' + source.med_id + '0').find('.Section').each(function(i,e){
 						_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).children('h1').text()}, '#sink_tab_' + source.med_id);
 					});
             	}
