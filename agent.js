@@ -261,9 +261,8 @@ function agent(serviceUrl, options){
 			           		return ($(document).height() * .85) + 'px';  
 				       }
 					});
-					$('#' + source._id + 'modal').each('.Section', function(sec){
-						_append('#tab_rx', {'med_id': sec.attr('id'), 'title': sec.first('h1')}, '#sink_tab_' + source.med_id);
-						itr += 1;
+					$('#' + source._id + 'modal').find('.Section').each(function(i,e){
+						_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).first('h1')}, '#sink_tab_' + source.med_id);
 					});
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
