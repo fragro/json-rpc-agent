@@ -244,11 +244,23 @@ function agent(serviceUrl, options){
             	else{
 					_append('#' + source._cls, source, '#sink_' + source._cls);
             	}
+            	if(source._cls == 'RX'){
+				 	$('#' + source._id + 'modal').modal({
+				        backdrop: true,
+				        keyboard: true
+				    }).css({
+				        width: 'auto',
+				        'margin-left': function () {
+				            return -($(this).width() / 2);
+				        }
+				    });
+            	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
 			$('#sink_tab_' + source._cls + ' a#related_search').click( function(){
 				search($(this).html());
 			});	
+
             //$('#res').removeClass('text-error').addClass('text-success').html(content);
         } else {
             //$('#res').removeClass('text-success').addClass('text-error').html('No results found.');
