@@ -261,12 +261,17 @@ function agent(serviceUrl, options){
 			           		return ($(document).height() * .85) + 'px';  
 				       }
 					});
+				}
+				if(source._cls == 'RX'){
+					if(i%3 == 0){
+						_append('#endrow', {}, '#sink_' + source._cls);
+					} 
 					$('#' + source.med_id + '0').find('.Section').each(function(i,e){
 						if($(this).children('h1').text() != ''){
 							_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).children('h1').text()}, '#sink_tab_' + source.med_id);
 						}
 					});
-            	}
+				}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
 			$('#sink_tab_' + source._cls + ' a#related_search').click( function(){
