@@ -262,8 +262,7 @@ function agent(serviceUrl, options){
 				       }
 					});
 					$('#' + source._id + 'modal').find('.Section').each(function(i,e){
-						source.update('new_id', String(i+1));
-						_append('#tab_rx', source, '#sink_tab_' + source.med_id);
+						_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).first('h1').text()}, '#sink_tab_' + source.med_id);
 					});
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
