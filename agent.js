@@ -253,6 +253,12 @@ function agent(serviceUrl, options){
 				           return -($(this).width() / 2); 
 				       }
 					});
+					$('#' + source._id + 'modal').closest('.modal_body').css({
+							'max-height': function () { 
+				           		return ($(document).height() * .85) + 'px';  
+					       }
+					   }
+					});
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
