@@ -253,7 +253,7 @@ function agent(serviceUrl, options){
 				           return -($(this).width() / 2); 
 				       }
 					});
-					$('#' + source._id + 'modal').closest('.modal_body').css({
+					$('#' + source._id + 'modal').closest('.modal-body').css({
 						'max-height': function () { 
 			           		return ($(document).height() * .85) + 'px';  
 				       }
