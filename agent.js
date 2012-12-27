@@ -89,16 +89,16 @@ function agent(serviceUrl, options){
 	//rendering functions using mustache.js
 	this._render = _render;
 	function _render(template, data, render_to){
-	    var template = $(template).html();
-	    var html = Mustache.to_html(template, data);
+	    var template = Handlebars.compile($(template).html());
+	    var html = template(data);
 	    $(render_to).html(html);
 	}
 
 	//rendering functions using mustache.js
 	this._append = _append;
 	function _append(template, data, render_to){
-	    var template = $(template).html();
-	    var html = Mustache.to_html(template, data);
+	    var template = Handlebars.compile($(template).html());
+	    var html = template(data);
 	    $(render_to).append(html);
 	}
 
@@ -177,8 +177,8 @@ function agent(serviceUrl, options){
 	    var r = data.result.results.d.results;
 		for(var i in r){
 			console.log(r[i]);
-		    var template = $('#image').html();
-		    var html = Mustache.to_html(template, r[i]);
+    	    var template = Handlebars.compile($('#image').html());
+	    	var html = template(r[i]);
 		    $(div).append(html);
 		}
 	}
@@ -277,8 +277,8 @@ function agent(serviceUrl, options){
 	this.search = search;
 	function search(query){
 		//reset and setup tabbing
-		var template = $('#Basic').html();
-	    var html = Mustache.to_html(template, {});
+		var template =  Handlebars.compile($('#Basic').html());
+	    var html = template({});
 	    $('#content').html(html);
 	  	$('#myTab a').click(function (e) {
 				  e.preventDefault();
