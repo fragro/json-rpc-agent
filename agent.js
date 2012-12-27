@@ -272,7 +272,7 @@ function agent(serviceUrl, options){
 		//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description');
 		api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
 
-		grab_images(query);
+		//grab_images(query);
 		//get bing image results
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
