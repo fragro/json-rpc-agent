@@ -262,7 +262,8 @@ function agent(serviceUrl, options){
 				       }
 					});
 					$('#' + source._id + 'modal').find('.Section').each(function(i,e){
-						_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).first('h1').text()}, '#sink_tab_' + source.med_id);
+						_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).children('h1').text()}, '#sink_tab_' + source.med_id);
+						$('#sink_tab_' + source.med_id).affix();
 					});
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
