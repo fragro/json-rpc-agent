@@ -262,7 +262,7 @@ function agent(serviceUrl, options){
 				       }
 					});
 					$('#' + source.med_id + '0').find('.Section').each(function(i,e){
-						if('title': $(this).children('h1').text() != ''){
+						if($(this).children('h1').text() != ''){
 							_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).children('h1').text()}, '#sink_tab_' + source.med_id);
 						}
 					});
