@@ -244,6 +244,9 @@ function agent(serviceUrl, options){
             	else{
 					_append('#' + source._cls, source, '#sink_' + source._cls);
             	}
+            	if(source._cls == "MedLine"){
+					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
+            	}
             	if(source._cls == 'RX' || source._cls == 'PubMed'){
 					$('#' + source._id + 'modal').css({
 				       'width': function () { 
