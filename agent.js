@@ -264,7 +264,7 @@ function agent(serviceUrl, options){
 					$('#' + source._id + 'modal').each('.Section', function(sec){
 						_append('#tab_rx', {'med_id': sec.attr('id'), 'title': sec.('h1')}, '#sink_tab_' + source.med_id);
 						itr += 1;
-					})
+					});
             	}
 					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
         	}
