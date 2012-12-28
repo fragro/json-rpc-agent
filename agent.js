@@ -243,8 +243,11 @@ function agent(serviceUrl, options){
             	}
             	else{
 					_append('#' + source._cls, source, '#sink_' + source._cls);
-            	}
+        	}
             	if(source._cls == "MedLine"){
+            		for(var key in source.site_keys){
+            			_append('#key_medline', {'key': key}, '#sink_key_' + source._id);
+            		}
 					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
             	}
             	if(source._cls == 'RX' || source._cls == 'PubMed'){
