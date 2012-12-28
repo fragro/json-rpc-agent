@@ -287,24 +287,21 @@ function agent(serviceUrl, options){
 
 	this.activate = activate;
 	function activate(id){
-	  	/*$(function(){
-		  $('#container' + id).isotope({
-			  // options
-			  itemSelector : '.item',
-			  layoutMode : 'fitRows',
-			  getSortData : {
-			    info : function ( $elem ) {
-			      return $elem.find('.info').text();
-			    },
-			  }
+	  	$(function(){
+			  // cache container
+			var $container = $('#container' + id);
+				// initialize isotope
+				$container.isotope({
+				  // options...
 			});
- 			$('#sort-by-' + id +' a').click(function(){
-			  // get href attribute, minus the '#'
-			  var sortName = $(this).attr('href').slice(1);
-			  $('#container' + id).isotope({ sortBy : sortName });
+
+ 			// filter items when filter link is clicked
+			$('#filters' + id + 'a').click(function(){
+			  var selector = $(this).attr('data-filter');
+			  $container.isotope({ filter: selector });
 			  return false;
 			});
-		});*/
+		});
 	}
 
 	this.search = search;
