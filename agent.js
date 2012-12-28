@@ -243,12 +243,13 @@ function agent(serviceUrl, options){
             	}
             	else{
 					_append('#' + source._cls, source, '#sink_' + source._cls);
-        	}
+        		}
             	if(source._cls == "MedLine"){
             		for(var key in source.site_keys){
-            			_append('#key_medline', {'key': source.site_keys[key]}, '#sink_key_' + source._id);
+            			_append('#key_medline', {'key': source.site_keys[key] + source._id}, '#sink_key_' + source._id);
             		}
 					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
+					activate(source._id);
             	}
             	if(source._cls == 'RX' || source._cls == 'PubMed'){
 					$('#' + source._id + 'modal').css({
@@ -282,6 +283,28 @@ function agent(serviceUrl, options){
         } else {
             //$('#res').removeClass('text-success').addClass('text-error').html('No results found.');
     	}
+	}
+
+	this.activate = activate;
+	function activate(id){
+	  	$(function(){
+		  $('#container' + id).isotope({
+			  // options
+			  itemSelector : '.item',
+			  layoutMode : 'fitRows',
+			  getSortData : {
+			    info : function ( $elem ) {
+			      return $elem.find('.info').text();
+			    },
+			  }
+			});
+ 			$('#sort-by' + id +' a').click(function(){
+			  // get href attribute, minus the '#'
+			  var sortName = $(this).attr('href').slice(1);
+			  $('#container' + id).isotope({ sortBy : sortName });
+			  return false;
+			});
+		});
 	}
 
 	this.search = search;
