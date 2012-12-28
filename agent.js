@@ -21,6 +21,21 @@ function stars(div, id){
 	});
 }
 
+function activate(id){
+	  // cache container
+	var $container = $('#container' + id);
+		// initialize isotope
+		$container.isotope({ filter: '*' });
+
+		// filter items when filter link is clicked
+	$('#filters' + id + 'a').click(function(){
+	  var selector = $(this).attr('data-filter');
+	  $container.isotope({ filter: selector });
+	  return false;
+	});
+	$('filterholder' + id).show();
+}
+
 //INTERFACE SCRIPT
 function checkLessButton(){
 	if($(window.curDiv).prev().length){
@@ -249,7 +264,6 @@ function agent(serviceUrl, options){
             			_append('#key_medline', {'key': source.site_keys[key]}, '#sink_key_' + source._id);
             		}
 					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
-					activate(source._id);
             	}
             	if(source._cls == 'RX' || source._cls == 'PubMed'){
 					$('#' + source._id + 'modal').css({
@@ -285,21 +299,6 @@ function agent(serviceUrl, options){
     	}
 	}
 
-	this.activate = activate;
-	function activate(id){
-		  // cache container
-		var $container = $('#container' + id);
-			// initialize isotope
-			$container.isotope({ filter: '*' });
-
-			// filter items when filter link is clicked
-		$('#filters' + id + 'a').click(function(){
-		  var selector = $(this).attr('data-filter');
-		  $container.isotope({ filter: selector });
-		  return false;
-		});
-	}
-
 	this.search = search;
 	function search(query){
 		//reset and setup tabbing
@@ -307,8 +306,8 @@ function agent(serviceUrl, options){
 	    var html = template({});
 	    $('#content').html(html);
 	  	$('#myTab a').click(function (e) {
-				  e.preventDefault();
-				  $(this).tab('show');
+			  e.preventDefault();
+			  $(this).tab('show');
 		});		
 		//setup complete. search!
 		api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
