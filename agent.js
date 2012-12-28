@@ -290,9 +290,7 @@ function agent(serviceUrl, options){
 			  // cache container
 			var $container = $('#container' + id);
 				// initialize isotope
-				$container.isotope({
-				  // options...
-			});
+				$container.isotope({ filter: '*' });
 
  			// filter items when filter link is clicked
 			$('#filters' + id + 'a').click(function(){
