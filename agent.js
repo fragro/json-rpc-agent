@@ -33,7 +33,7 @@ function activate(id){
 	  $container.isotope({ filter: selector });
 	  return false;
 	});
-	$('filterholder' + id).show();
+	$('filterholder' + id).toggleClass('hidden');
 }
 
 //INTERFACE SCRIPT
