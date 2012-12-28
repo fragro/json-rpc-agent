@@ -287,17 +287,23 @@ function agent(serviceUrl, options){
 
 	this.activate = activate;
 	function activate(id){
-			  // cache container
-			var $container = $('#container' + id);
-				// initialize isotope
-				$container.isotope({ filter: '*' });
+		$('#sink_key_' + id + ' .tab a').each(function() {
+		    var $this = $(this);
+		    $this.click(function (e) {
+		        e.preventDefault();
+		        $this.tab('show');
+		    });
+		    var $container = $('#container' + id);
+			// initialize isotope
+			$container.isotope({ filter: '*' });
+		});
 
- 			// filter items when filter link is clicked
-			$('#filters' + id + 'a').click(function(){
-			  var selector = $(this).attr('data-filter');
-			  $container.isotope({ filter: selector });
-			  return false;
-			});
+		// filter items when filter link is clicked
+		$('#filters' + id + ' a').click(function(){
+		  var selector = $(this).attr('data-filter');
+		  $container.isotope({ filter: selector });
+		  return false;
+		});
 	}
 
 	this.search = search;
