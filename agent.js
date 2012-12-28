@@ -28,12 +28,12 @@ function activate(id){
 		$container.isotope({ filter: '*' });
 
 		// filter items when filter link is clicked
-	$('#filters' + id + 'a').click(function(){
+	$('#filters' + id + ' a').click(function(){
 	  var selector = $(this).attr('data-filter');
 	  $container.isotope({ filter: selector });
 	  return false;
 	});
-	$('filterholder' + id).toggleClass('hidden');
+	$('#filterholder' + id).toggleClass('hidden');
 }
 
 //INTERFACE SCRIPT
