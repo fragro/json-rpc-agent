@@ -288,11 +288,11 @@ function agent(serviceUrl, options){
 	this.activate = activate;
 	function activate(id){
 	  // cache container
-	   console.log(id);
+	   console.log($('#container' + id));
 		var $container = $('#container' + id);
 			// initialize isotope
-			$container.isotope({
-			  // options...
+		$container.isotope({
+		  	// options...
 		});
 
 			// filter items when filter link is clicked
