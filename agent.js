@@ -286,15 +286,15 @@ function agent(serviceUrl, options){
 	}
 
 	this.activate = activate;
-	function activate(id){
+	function activate(){
 	  // cache container
-	   console.log($('#container' + id));
-		var $container = $('#container' + id);
+	   console.log($('#container'));
+		var $container = $('#container');
 			// initialize isotope
 		$container.isotope();
 
 			// filter items when filter link is clicked
-		$('#filters' + id + 'a').click(function(){
+		$('#filters a').click(function(){
 		  var selector = $(this).attr('data-filter');
 		  $container.isotope({ filter: selector });
 		  return false;
@@ -302,7 +302,7 @@ function agent(serviceUrl, options){
 	}
 
 	this.search = search;
-	function search(query){
+	function search(query, callback)
 		//reset and setup tabbing
 		var template =  Handlebars.compile($('#Basic').html());
 	    var html = template({});
@@ -322,10 +322,13 @@ function agent(serviceUrl, options){
 		//get bing image results
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
+	    if (callback) {  
+        	callback();  
+    	}  
 	}	
 
 	this.api = api;
-	function api(options, field, kwargs) {
+	function api(options, field, kwargs, callback) {
 		//not required
 		if(kwargs == undefined){kwargs={}};
 		if (kwargs['from'] == undefined){
@@ -348,6 +351,9 @@ function agent(serviceUrl, options){
 	  			$('#sink_MedLine').removeClass('tab-pane');
 	  			$('#href_MedLine').remove();
 			}
+		    if (callback && typeof(callback) === "function") {  
+		        callback();  
+		    }  
 		});
 	}
 
