@@ -287,20 +287,18 @@ function agent(serviceUrl, options){
 
 	this.activate = activate;
 	function activate(id){
-	  	$(function(){
-			  // cache container
-			var $container = $('#container' + id);
-				// initialize isotope
-				$container.isotope({
-				  // options...
-			});
+	  // cache container
+		var $container = $('#container' + id);
+			// initialize isotope
+			$container.isotope({
+			  // options...
+		});
 
- 			// filter items when filter link is clicked
-			$('#filters' + id + 'a').click(function(){
-			  var selector = $(this).attr('data-filter');
-			  $container.isotope({ filter: selector });
-			  return false;
-			});
+			// filter items when filter link is clicked
+		$('#filters' + id + 'a').click(function(){
+		  var selector = $(this).attr('data-filter');
+		  $container.isotope({ filter: selector });
+		  return false;
 		});
 	}
 
