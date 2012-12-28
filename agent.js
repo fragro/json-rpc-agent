@@ -291,9 +291,7 @@ function agent(serviceUrl, options){
 	   console.log($('#container' + id));
 		var $container = $('#container' + id);
 			// initialize isotope
-		$container.isotope({
-		  	// options...
-		});
+		$container.isotope();
 
 			// filter items when filter link is clicked
 		$('#filters' + id + 'a').click(function(){
