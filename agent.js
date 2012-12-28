@@ -23,6 +23,8 @@ function stars(div, id){
 
 function activate(id){
 	  // cache container
+	$('#filterholder' + id).toggleClass('hidden');
+
 	var $container = $('#container' + id);
 		// initialize isotope
 		$container.isotope({ filter: '*' });
@@ -33,7 +35,6 @@ function activate(id){
 	  $container.isotope({ filter: selector });
 	  return false;
 	});
-	$('#filterholder' + id).toggleClass('hidden');
 }
 
 //INTERFACE SCRIPT
