@@ -249,7 +249,6 @@ function agent(serviceUrl, options){
             			_append('#key_medline', {'key': source.site_keys[key]}, '#sink_key_' + source._id);
             		}
 					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
-					activate(source._id);
             	}
             	if(source._cls == 'RX' || source._cls == 'PubMed'){
 					$('#' + source._id + 'modal').css({
@@ -293,7 +292,7 @@ function agent(serviceUrl, options){
 			// initialize isotope
 		$container.isotope();
 
-			// filter items when filter link is clicked
+		// filter items when filter link is clicked
 		$('#filters a').click(function(){
 		  var selector = $(this).attr('data-filter');
 		  $container.isotope({ filter: selector });
@@ -302,7 +301,7 @@ function agent(serviceUrl, options){
 	}
 
 	this.search = search;
-	function search(query, callback)
+	function search(query, callback){
 		//reset and setup tabbing
 		var template =  Handlebars.compile($('#Basic').html());
 	    var html = template({});
