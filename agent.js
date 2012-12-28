@@ -246,7 +246,7 @@ function agent(serviceUrl, options){
         	}
             	if(source._cls == "MedLine"){
             		for(var key in source.site_keys){
-            			_append('#key_medline', {'key': key}, '#sink_key_' + source._id);
+            			_append('#key_medline', {'key': source.site_keys[key]}, '#sink_key_' + source._id);
             		}
 					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
             	}
