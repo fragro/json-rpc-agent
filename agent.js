@@ -287,7 +287,7 @@ function agent(serviceUrl, options){
 
 	this.activate = activate;
 	function activate(id){
-	  	$(function(){
+	  	/*$(function(){
 		  $('#container' + id).isotope({
 			  // options
 			  itemSelector : '.item',
@@ -304,7 +304,7 @@ function agent(serviceUrl, options){
 			  $('#container' + id).isotope({ sortBy : sortName });
 			  return false;
 			});
-		});
+		});*/
 	}
 
 	this.search = search;
