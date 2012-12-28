@@ -288,6 +288,7 @@ function agent(serviceUrl, options){
 	this.activate = activate;
 	function activate(id){
 	  // cache container
+	   console.log(id);
 		var $container = $('#container' + id);
 			// initialize isotope
 			$container.isotope({
