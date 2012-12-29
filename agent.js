@@ -252,6 +252,7 @@ function agent(serviceUrl, options){
   		window.hits[type] = data.length;
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
+            	source['active'] = (i == 0);
             	console.log(data[i]);
                 source = _process(data[i]._source);
             	if(i != 0 && source._cls == 'Node' || i != 0 && source._cls == 'Asset'){
@@ -272,8 +273,7 @@ function agent(serviceUrl, options){
 				           return ($(document).width() * .9) + 'px';  
 				       },
 				       'margin-left': function () { 
-				           return -($(this).width() / 2); 
-				       }
+				           return -($(this).width() / 2);				       }
 					});
 					$('#' + source._id + 'modal').closest('.modal-body').css({
 						'max-height': function () { 
