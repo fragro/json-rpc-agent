@@ -255,6 +255,11 @@ function agent(serviceUrl, options){
             	console.log(data[i]);
                 var source = _process(data[i]._source);
             	source['active'] = (i == 0);
+            	if(source._cls == 'RX'){
+					if(source['semantic']['use'] != null){
+						source['use'] = source['semantic']['use'][0];
+					}
+            	}
             	if(i != 0 && source._cls == 'Node' || i != 0 && source._cls == 'Asset'){
 					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
             	}
@@ -282,9 +287,6 @@ function agent(serviceUrl, options){
 					});
 				}
 				if(source._cls == 'RX'){
-					if(source['semantic']['use'] != null){
-						source['use'] = source['semantic']['use'][0];
-					}
 					$('#' + source.med_id + '0').find('.Section').each(function(i,e){
 						if($(this).children('h1').text() != ''){
 							_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).children('h1').text()}, '#sink_tab_' + source.med_id);
