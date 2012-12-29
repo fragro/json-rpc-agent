@@ -257,7 +257,7 @@ function agent(serviceUrl, options){
             	source['active'] = (i == 0);
             	if(source._cls == 'RX'){
 					if(source['semantic']['use'] != null){
-						source['use'] = source['semantic']['use'][0];
+						source['use'] = source['semantic']['use'];
 					}
             	}
             	if(i != 0 && source._cls == 'Node' || i != 0 && source._cls == 'Asset'){
