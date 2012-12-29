@@ -282,6 +282,9 @@ function agent(serviceUrl, options){
 					});
 				}
 				if(source._cls == 'RX'){
+					if(source['semantic']['use'] != null){
+						source['use'] = source['semantic']['use'][0];
+					}
 					$('#' + source.med_id + '0').find('.Section').each(function(i,e){
 						if($(this).children('h1').text() != ''){
 							_append('#tab_rx', {'med_id': $(this).attr('id'), 'title': $(this).children('h1').text()}, '#sink_tab_' + source.med_id);
