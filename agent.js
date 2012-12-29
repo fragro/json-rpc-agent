@@ -252,9 +252,9 @@ function agent(serviceUrl, options){
   		window.hits[type] = data.length;
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
-            	source['active'] = (i == 0);
             	console.log(data[i]);
-                source = _process(data[i]._source);
+                var source = _process(data[i]._source);
+            	source['active'] = (i == 0);
             	if(i != 0 && source._cls == 'Node' || i != 0 && source._cls == 'Asset'){
 					_append('#tab_' + source._cls, source, '#sink_tab_' + source._cls);
             	}
