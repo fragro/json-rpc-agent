@@ -359,12 +359,10 @@ function agent(serviceUrl, options){
 		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
 		d = {
-			    "query_string" : {
-			        "fields" : ["description", "title^5"],
-			        "query" : options['query'],
-			    },
-		        "size" : kwargs['size'],
-		        "from":  kwargs['from'],
+		        fields : ["description", "title^5"],
+		        query : options['query'],
+		        size : kwargs['size'],
+		        from:  kwargs['from'],
 			}
 		$.ajax({
 				dataType: "json",
