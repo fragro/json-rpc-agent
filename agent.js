@@ -350,6 +350,18 @@ function agent(serviceUrl, options){
 		r.doSearch(parseSearchData);
 	}
 
+	this.success = success;
+	function success(data) {
+  		//record hits
+  		//appends the search data
+  		parseSearchData(data, options['type']);
+			//should convert each type into a priority queue and move them up appropriately
+  		if(options['type'] == 'asset' && data.hits.hits == 0){
+  			$('#sink_MedLine').appendTo('#sink_Asset');
+  			$('#sink_MedLine').removeClass('tab-pane');
+  			$('#href_MedLine').remove();
+	}
+
 	this.api = api;
 	function api(options, field, kwargs) {
 		//not required
@@ -368,17 +380,13 @@ function agent(serviceUrl, options){
 		            "exists" : { "field" : "type" }
 		        }
 		    }
-		$.getJSON(url, d
-		  function(data) {
-	  		//record hits
-	  		//appends the search data
-	  		parseSearchData(data, options['type']);
-  			//should convert each type into a priority queue and move them up appropriately
-	  		if(options['type'] == 'asset' && data.hits.hits == 0){
-	  			$('#sink_MedLine').appendTo('#sink_Asset');
-	  			$('#sink_MedLine').removeClass('tab-pane');
-	  			$('#href_MedLine').remove();
-			}
+		$.ajax({
+			  dataType: "json",
+			  url: url,
+			  data: d,
+			  success: success
+			});
+		  
 		});
 	}
 
