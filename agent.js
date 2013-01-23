@@ -94,6 +94,7 @@ function agent(serviceUrl, options){
     this._userID = options.userID;
     this._type = 'database';
 	this.div = options.div;
+	this.querySize = options.querySize;
     console.log(this);
 	this.version = "0.1.0.1";
 	this.debug =  true;
@@ -317,7 +318,7 @@ function agent(serviceUrl, options){
 			  $(this).tab('show');
 		});		
 		//setup complete. search!
-		api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description');
+		api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
 
 		//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
 		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
