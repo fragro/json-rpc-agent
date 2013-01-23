@@ -10,12 +10,6 @@ window.requestCount = 0;
 window.curDiv = '';
 window.retries = 0;
 
-Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-  if(v1 == v2) {
-    return options.fn(this);
-  }
-  return options.inverse(this);
-});
 
 function stars(div, id){
 	$(div).raty({
@@ -323,10 +317,12 @@ function agent(serviceUrl, options){
 			  $(this).tab('show');
 		});		
 		//setup complete. search!
-		api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
+		api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description');
+
+		//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
 		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
 		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
-		api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
+		//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
 		api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
 
 		//grab_images(query);
