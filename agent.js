@@ -362,16 +362,20 @@ function agent(serviceUrl, options){
 			    "query_string" : {
 			        "fields" : ["description", "title^5"],
 			        "query" : options['query'],
-			        "size" : kwargs['size'],
-			        "from":  kwargs['from'],
-			        "use_dis_max" : true
 			    }
+
+		        "size" : kwargs['size'],
+		        "from":  kwargs['from'],
 			}
 		$.ajax({
-			  dataType: "json",
-			  url: url,
-			  data: d,
-			  success: success
+				dataType: "json",
+				type: 'POST',
+				//contentType: 'application/json; charset=UTF-8',
+				crossDomain: true,
+				dataType: 'json',
+				url: url,
+				data: d,
+				success: success
 		});
   	}
 
