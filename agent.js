@@ -378,8 +378,9 @@ function agent(serviceUrl, options){
 		d = { "constant_score" : {
 		        "filter" : {
 		            "exists" : { "field" : "type" }
-		        }
-		    }
+		        	}
+		    	}
+		    }	
 		$.ajax({
 			  dataType: "json",
 			  url: url,
