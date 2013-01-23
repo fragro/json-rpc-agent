@@ -363,6 +363,11 @@ function agent(serviceUrl, options){
 		        q : options['query'],
 		        size : kwargs['size'],
 		        from:  kwargs['from'],
+	            span_not : {
+			        exclude : {
+			            span_term : { "aisle7_cls" : "concept" }
+			        }
+   				}
 			}
 		$.ajax({
 				dataType: "json",
