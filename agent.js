@@ -368,7 +368,6 @@ function agent(serviceUrl, options){
 			}
 		$.ajax({
 				dataType: "json",
-				type: 'POST',
 				//contentType: 'application/json; charset=UTF-8',
 				crossDomain: true,
 				dataType: 'json',
