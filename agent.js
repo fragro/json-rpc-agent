@@ -386,9 +386,7 @@ function agent(serviceUrl, options){
 			  data: d,
 			  success: success
 			});
-		  
-		});
-	}
+  	}
 
 	this.rate = rate;
 	function rate(indexkey, rating) {
