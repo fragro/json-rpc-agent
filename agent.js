@@ -104,8 +104,6 @@ function agent(serviceUrl, options){
 	this.that = this;
 	this.evalhits = [['asset', '#href_Asset']];
 
-	ejs.client = ejs.jQueryClient(this.url);
-
 	//rendering functions using mustache.js
 	this._render = _render;
 	function _render(template, data, render_to){
@@ -336,6 +334,9 @@ function agent(serviceUrl, options){
 
 	this.api2 = api2;
 	function api2(options, field, kwargs){
+		
+		ejs.client = ejs.jQueryClient(this.url);
+
 		/* construct a termQuery object */
 		var termQuery = ejs.TermQuery(field, options['query']);
 
