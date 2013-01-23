@@ -10,6 +10,13 @@ window.requestCount = 0;
 window.curDiv = '';
 window.retries = 0;
 
+Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+  if(v1 == v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+
 function stars(div, id){
 	$(div).raty({
 	  path: '',
