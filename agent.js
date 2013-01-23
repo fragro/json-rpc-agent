@@ -361,7 +361,7 @@ function agent(serviceUrl, options){
 		var data = JSON.stringify({
             query: {
                 match: {
-                    _all: options['query']
+                    description: options['query']
                 }
             }
         }); 
