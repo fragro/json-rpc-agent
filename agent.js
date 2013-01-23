@@ -358,25 +358,28 @@ function agent(serviceUrl, options){
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
 		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
-		d = {
-		        fields : ["description", "title^5"],
-		        q : options['query'],
-		        size : kwargs['size'],
-		        from:  kwargs['from'],
-	            span_not : {
-			        exclude : {
-			            span_term : { "aisle7_cls" : "concept" }
-			        }
-   				}
-			}
+		var data = {
+            query: {
+                match: {
+                    _all: options['query']
+                }
+            },
+            fields: 'description'
+        }; 
+
 		$.ajax({
 				dataType: "json",
+	            type: 'POST',
 				//contentType: 'application/json; charset=UTF-8',
 				crossDomain: true,
 				dataType: 'json',
 				url: url,
-				data: d,
-				success: success
+				data: data,
+				success: success,
+	          error: function(jqXHR, textStatus, errorThrown) {
+	                var jso = jQuery.parseJSON(jqXHR.responseText);
+	                error_note('section', 'error', '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
+	            }
 		});
   	}
 
