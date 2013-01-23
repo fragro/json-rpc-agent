@@ -99,10 +99,12 @@ function agent(serviceUrl, options){
 	this.version = "0.1.0.1";
 	this.debug =  true;
 	this.div = '#recommendation';
-	this.url;
+	this.url = options.url;
 	this.userID;
 	this.that = this;
 	this.evalhits = [['asset', '#href_Asset']];
+
+	ejs.client = ejs.jQueryClient(this.url);
 
 	//rendering functions using mustache.js
 	this._render = _render;
@@ -248,7 +250,7 @@ function agent(serviceUrl, options){
 	}
 
 	this.parseSearchData = parseSearchData;
-	function parseSearchData(results, type){
+	function parseSearchData(results){
 		console.log(results);
 		var data = results.hits.hits;
   		window.hits[type] = data.length;
@@ -318,19 +320,34 @@ function agent(serviceUrl, options){
 			  $(this).tab('show');
 		});		
 		//setup complete. search!
-		api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
+		api2({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
 
 		//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
-		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
-		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
+		api2({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+		api2({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 		//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
-		api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
+		api2({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
 
 		//grab_images(query);
 		//get bing image results
 		//if assets didn't return general inforemation, use the medline.
 		//If that is unavailable inform the user
 	}	
+
+	this.api2 = api2;
+	function api2(options, field, kwargs){
+		/* construct a termQuery object */
+		var termQuery = ejs.TermQuery(field, options['query']);
+
+		/* execute the request */
+		var r = ejs.Request()
+		    .collections(options['index'])
+		    .types(options['type'])
+		    .query(termQuery);
+
+		console.log(r.toString());
+		r.doSearch(parseSearchData);
+	}
 
 	this.api = api;
 	function api(options, field, kwargs) {
