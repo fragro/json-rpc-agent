@@ -331,23 +331,6 @@ function agent(serviceUrl, options){
 		//If that is unavailable inform the user
 	}	
 
-	this.api2 = api2;
-	function api2(options, field, kwargs){
-
-		ejs.client = ejs.jQueryClient(this.url);
-
-		/* construct a termQuery object */
-		var termQuery = ejs.TermQuery(field, options['query']);
-
-		/* execute the request */
-		var r = ejs.Request()
-		    .collections(options['index'])
-		    .types(options['type'])
-		    .query(termQuery);
-
-		console.log(r.toString());
-		r.doSearch(parseSearchData);
-	}
 
 	this.success = success;
 	function success(data) {
@@ -373,14 +356,17 @@ function agent(serviceUrl, options){
 			kwargs['size'] = 10;
 		}
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
-		url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
+		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
-		d = { "constant_score" : {
-		        "filter" : {
-		            "exists" : { "field" : "type" }
-		        	}
-		    	}
-		    }	
+		d = {
+			    "query_string" : {
+			        "fields" : ["description", "title^5"],
+			        "query" : options['query'],
+			        "size" : kwargs['size'],
+			        "from":  kwargs['from'],
+			        "use_dis_max" : true
+			    }
+			}
 		$.ajax({
 			  dataType: "json",
 			  url: url,
