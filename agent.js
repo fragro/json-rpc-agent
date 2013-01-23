@@ -360,6 +360,7 @@ function agent(serviceUrl, options){
   			$('#sink_MedLine').appendTo('#sink_Asset');
   			$('#sink_MedLine').removeClass('tab-pane');
   			$('#href_MedLine').remove();
+		}
 	}
 
 	this.api = api;
@@ -386,7 +387,7 @@ function agent(serviceUrl, options){
 			  url: url,
 			  data: d,
 			  success: success
-			});
+		});
   	}
 
 	this.rate = rate;
