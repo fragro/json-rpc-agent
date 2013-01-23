@@ -251,7 +251,6 @@ function agent(serviceUrl, options){
 	function parseSearchData(results){
 		console.log(results);
 		var data = results.hits.hits;
-  		window.hits[type] = data.length;
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
