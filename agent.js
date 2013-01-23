@@ -363,8 +363,7 @@ function agent(serviceUrl, options){
                 match: {
                     _all: options['query']
                 }
-            },
-            fields: 'description'
+            }
         }); 
 
 		$.ajax({
