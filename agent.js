@@ -378,7 +378,7 @@ function agent(serviceUrl, options){
 				success: success,
 	          error: function(jqXHR, textStatus, errorThrown) {
 	                var jso = jQuery.parseJSON(jqXHR.responseText);
-	                error_note('section', 'error', '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
+	                alert( '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
 	            }
 		});
   	}
