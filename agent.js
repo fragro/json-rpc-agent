@@ -358,14 +358,14 @@ function agent(serviceUrl, options){
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
 		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
-		var data = {
+		var data = JSON.stringify({
             query: {
                 match: {
                     _all: options['query']
                 }
             },
             fields: 'description'
-        }; 
+        }); 
 
 		$.ajax({
 				dataType: "json",
