@@ -360,7 +360,7 @@ function agent(serviceUrl, options){
 		console.log(url);
 		d = {
 		        fields : ["description", "title^5"],
-		        query : options['query'],
+		        q : options['query'],
 		        size : kwargs['size'],
 		        from:  kwargs['from'],
 			}
