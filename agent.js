@@ -318,13 +318,13 @@ function agent(serviceUrl, options){
 			  $(this).tab('show');
 		});		
 		//setup complete. search!
-		api2({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
+		api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
 
 		//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
-		api2({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
-		api2({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
+		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 		//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
-		api2({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
+		api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
 
 		//grab_images(query);
 		//get bing image results
@@ -334,7 +334,7 @@ function agent(serviceUrl, options){
 
 	this.api2 = api2;
 	function api2(options, field, kwargs){
-		
+
 		ejs.client = ejs.jQueryClient(this.url);
 
 		/* construct a termQuery object */
@@ -363,7 +363,12 @@ function agent(serviceUrl, options){
 		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
 		url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
-		$.getJSON(url,
+		d = { "constant_score" : {
+		        "filter" : {
+		            "exists" : { "field" : "type" }
+		        }
+		    }
+		$.getJSON(url, d
 		  function(data) {
 	  		//record hits
 	  		//appends the search data
