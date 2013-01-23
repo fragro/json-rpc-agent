@@ -362,8 +362,7 @@ function agent(serviceUrl, options){
 			    "query_string" : {
 			        "fields" : ["description", "title^5"],
 			        "query" : options['query'],
-			    }
-
+			    },
 		        "size" : kwargs['size'],
 		        "from":  kwargs['from'],
 			}
