@@ -395,7 +395,6 @@ function agent(serviceUrl, options){
                 }
             }
         }); 
-		alert(final_api);
 		$.ajax({
 				dataType: "json",
 	            type: 'POST',
