@@ -251,7 +251,7 @@ function agent(serviceUrl, options){
 		_send_request({
 			div: this.div, 
 			url: this._url,
-			method: 'subscribe', 
+			method: 'userexists', 
 			params: [this._userID], 
 			successcall: _registrationCallback, 
 			errorcall: _errorCallback
