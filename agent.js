@@ -1,3 +1,4 @@
+
 //Nutraspace Agent Ver 0.1
 /*Nutraspace Agent Client interfaces with the server through the JSON-RPC protocol and uses jQueyr AJAX to help
 * access that protocol. The agent subscribes users with userID and profile information, and the server
@@ -378,7 +379,7 @@ function agent(serviceUrl, options){
 		if (kwargs['size'] == undefined){
 			kwargs['size'] = 10;
 		}
-		var url = this.url + options['index'] + '/' + options['type'] + '/_search'
+		var url = 'http://70.189.71.82:9200/' + options['index'] + '/' + options['type'] + '/_search'
 		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
 		var data = JSON.stringify({
