@@ -319,7 +319,7 @@ function agent(serviceUrl, options){
 						}
 					});
 				}
-					//stars('#star_pub_' + source.pmc, 'pubid' + source.pmc);
+				stars('#star_' + source._id, source._id);
         	}
 			$('#sink_tab_' + source._cls + ' a#related_search').click( function(){
 				search($(this).html());
