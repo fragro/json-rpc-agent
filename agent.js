@@ -344,7 +344,7 @@ function agent(serviceUrl, options){
 		api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
 
 		//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
-		//api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
 		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 		//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
 		api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
