@@ -239,7 +239,7 @@ function agent(serviceUrl, options){
 		});
 	}
 
-	this.subscribe = subscribe;
+	this.user_exists = user_exists;
 	function user_exists() {
 		_send_request({
 			div: this.div, 
