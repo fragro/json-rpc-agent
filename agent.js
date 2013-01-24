@@ -335,6 +335,7 @@ function agent(serviceUrl, options){
 	function search(query){
 		//reset and setup tabbing
 		if(sessionStorage.getItem("searching") == "false"){
+			$('#loading').show();
 			sessionStorage.setItem("searching", "true");
 			var template =  Handlebars.compile($('#Basic').html());
 		    var html = template({});
@@ -407,6 +408,7 @@ function agent(serviceUrl, options){
 						success(data);
 						if(final_api == true){
 							sessionStorage.setItem("searching", "false");
+							$('#loading').hide();
 						}
 				},
 	          error: function(jqXHR, textStatus, errorThrown) {
