@@ -395,7 +395,7 @@ function agent(serviceUrl, options){
                 }
             }
         }); 
-
+		alert(final_api);
 		$.ajax({
 				dataType: "json",
 	            type: 'POST',
@@ -406,7 +406,7 @@ function agent(serviceUrl, options){
 				data: data,
 				success: function(data){
 						success(data);
-						if(final_api){
+						if(final_api == true){
 							sessionStorage.setItem("searching", "false");
 						}
 				},
