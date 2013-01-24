@@ -11,6 +11,10 @@ window.curDiv = '';
 window.retries = 0;
 
 
+function register(is_doctor){
+	$("#user_check").fadeOut("fast");
+}
+
 function stars(div, id){
 	$(div).raty({
 	  path: '',
