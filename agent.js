@@ -334,7 +334,7 @@ function agent(serviceUrl, options){
 	this.search = search;
 	function search(query){
 		//reset and setup tabbing
-		if(sessionStorage.getItem("searching") == false;){
+		if(sessionStorage.getItem("searching") == false){
 			sessionStorage.setItem(searching, true);
 			var template =  Handlebars.compile($('#Basic').html());
 		    var html = template({});
