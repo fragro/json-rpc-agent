@@ -105,6 +105,7 @@ function agent(serviceUrl, options){
 	this.div = '#recommendation';
 	this.url = options.url;
 	this.userID;
+	this.searching = false;
 	this.that = this;
 	this.evalhits = [['asset', '#href_Asset']];
 
@@ -333,22 +334,25 @@ function agent(serviceUrl, options){
 	this.search = search;
 	function search(query){
 		//reset and setup tabbing
-		var template =  Handlebars.compile($('#Basic').html());
-	    var html = template({});
-	    $('#content').html(html);
-	  	$('#myTab a').click(function (e) {
-			  e.preventDefault();
-			  $(this).tab('show');
-		});		
-		//setup complete. search!
-		api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
+		if(!this.searching){
+			this.searching = true;
+			var template =  Handlebars.compile($('#Basic').html());
+		    var html = template({});
+		    $('#content').html(html);
+		  	$('#myTab a').click(function (e) {
+				  e.preventDefault();
+				  $(this).tab('show');
+			});		
+			//setup complete. search!
+			api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
 
-		//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
-		api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
-		api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
-		//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
-		api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
-
+			//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
+			api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+			api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
+			//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
+			api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
+			this.searching = false;
+		}
 		//grab_images(query);
 		//get bing image results
 		//if assets didn't return general inforemation, use the medline.
