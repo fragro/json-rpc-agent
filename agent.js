@@ -350,8 +350,8 @@ function agent(serviceUrl, options){
 			api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
 			api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 			//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
-			api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
-			sessionStorage.setItem("searching", "false");
+			api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description', true);
+			
 		}
 		//grab_images(query);
 		//get bing image results
@@ -359,7 +359,7 @@ function agent(serviceUrl, options){
 		//If that is unavailable inform the user
 	}	
 
-
+	//callback function to put the search data into the page
 	this.success = success;
 	function success(data) {
   		//record hits
@@ -371,10 +371,11 @@ function agent(serviceUrl, options){
   			$('#sink_MedLine').removeClass('tab-pane');
   			$('#href_MedLine').remove();
 		}
+
 	}
 
 	this.api = api;
-	function api(options, field, kwargs) {
+	function api(options, field, kwargs, final_api) {
 		//not required
 		if(kwargs == undefined){kwargs={}};
 		if (kwargs['from'] == undefined){
@@ -403,7 +404,12 @@ function agent(serviceUrl, options){
 				dataType: 'json',
 				url: url,
 				data: data,
-				success: success,
+				success: function(data){
+						success(data);
+						if(final_api){
+							sessionStorage.setItem("searching", "false");
+						}
+				},
 	          error: function(jqXHR, textStatus, errorThrown) {
 	                var jso = jQuery.parseJSON(jqXHR.responseText);
 	                alert( '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
