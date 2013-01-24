@@ -360,8 +360,9 @@ function agent(serviceUrl, options){
 		console.log(url);
 		var data = JSON.stringify({
             query: {
-                match: {
-                    description: options['query'],
+                match_phrase: {
+		            "query" : options['query'],
+		            "type" : "phrase"
                 }
             }
         }); 
