@@ -99,7 +99,6 @@ function agent(serviceUrl, options){
     this._type = 'database';
 	this.div = options.div;
 	this.querySize = options.querySize;
-    console.log(this);
 	this.version = "0.1.0.1";
 	this.debug =  true;
 	this.div = '#recommendation';
@@ -107,6 +106,7 @@ function agent(serviceUrl, options){
 	this.userID;
 	this.that = this;
 	this.evalhits = [['asset', '#href_Asset']];
+
 
 	//rendering functions using mustache.js
 	this._render = _render;
@@ -228,13 +228,25 @@ function agent(serviceUrl, options){
 	}
 
 	this.subscribe = subscribe;
-	function subscribe() {
+	function subscribe(is_doc) {
 		_send_request({
 			div: this.div, 
 			url: this._url,
 			method: 'subscribe', 
-			params: [this._userID, this._search], 
+			params: [this._userID, is_doc], 
 			successcall: _successCallback, 
+			errorcall: _errorCallback
+		});
+	}
+
+	this.subscribe = subscribe;
+	function user_exists() {
+		_send_request({
+			div: this.div, 
+			url: this._url,
+			method: 'user_exists', 
+			params: [this._userID], 
+			successcall: _registrationCallback, 
 			errorcall: _errorCallback
 		});
 	}
