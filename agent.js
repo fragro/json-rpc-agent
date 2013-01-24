@@ -105,7 +105,7 @@ function agent(serviceUrl, options){
 	this.div = '#recommendation';
 	this.url = options.url;
 	this.userID;
-	this.searching = false;
+	sessionStorage.setItem("searching", false);
 	this.that = this;
 	this.evalhits = [['asset', '#href_Asset']];
 
@@ -334,8 +334,8 @@ function agent(serviceUrl, options){
 	this.search = search;
 	function search(query){
 		//reset and setup tabbing
-		if(!this.searching){
-			this.searching = true;
+		if(sessionStorage.getItem("searching") == false;){
+			sessionStorage.setItem(searching, true);
 			var template =  Handlebars.compile($('#Basic').html());
 		    var html = template({});
 		    $('#content').html(html);
@@ -351,7 +351,7 @@ function agent(serviceUrl, options){
 			api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
 			//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
 			api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description');
-			this.searching = false;
+			sessionStorage.setItem(searching, false);
 		}
 		//grab_images(query);
 		//get bing image results
