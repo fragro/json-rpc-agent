@@ -211,6 +211,13 @@ function agent(serviceUrl, options){
 		console.log(JSON.stringify(data));
 	}
 
+    //test callback functions for debugging
+	function _registrationCallback(data) {
+	    if(data.exists){
+	    	a._render('#registration_template', {}, '#registration');	
+	    }
+	}
+
 	function _errorCallback(err) {
 	    _cleanup();
 		console.log(JSON.stringify(err));
