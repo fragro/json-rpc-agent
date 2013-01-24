@@ -378,7 +378,7 @@ function agent(serviceUrl, options){
 		if (kwargs['size'] == undefined){
 			kwargs['size'] = 10;
 		}
-		var url = 'http://localhost:9200/' + options['index'] + '/' + options['type'] + '/_search'
+		var url = this.url + options['index'] + '/' + options['type'] + '/_search'
 		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
 		var data = JSON.stringify({
