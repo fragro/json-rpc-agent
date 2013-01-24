@@ -360,9 +360,9 @@ function agent(serviceUrl, options){
 		console.log(url);
 		var data = JSON.stringify({
             query: {
-                match_phrase: {
+                multi_match: {
 		            "query" : options['query'],
-		            "type" : "phrase"
+		            "fields" : ["title^5", "description"]
                 }
             }
         }); 
