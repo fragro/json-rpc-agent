@@ -163,10 +163,24 @@ function agent(serviceUrl, options){
 			$('#alert_box').html('');
 			$('#search-icon').removeClass('icon-spin icon-spinner').addClass('icon-search');;
   			sessionStorage.setItem("searching", "false");	
-
 		}
-
 	}
+
+	/* This function sets up the page when a search is called */
+	this._loading = _loading;
+	function _setup(on){
+		var template =  Handlebars.compile($('#Basic').html());
+	    var html = template({});
+	    $('#content').html(html);
+		var template =  Handlebars.compile($('#DataTypes').html());
+	    var html = template({});
+	    $('#type-of-data').html(html);
+	  	$('#myTab a').click(function (e) {
+			  e.preventDefault();
+			  $(this).tab('show');
+		});
+	}
+
 
     //private functions
     //successcallback for reccomendation
@@ -301,13 +315,7 @@ function agent(serviceUrl, options){
 		//reset and setup tabbing
 		if(sessionStorage.getItem("searching") == "false"){
 			_loading(true);
-			var template =  Handlebars.compile($('#Basic').html());
-		    var html = template({});
-		    $('#content').html(html);
-		  	$('#myTab a').click(function (e) {
-				  e.preventDefault();
-				  $(this).tab('show');
-			});		
+			_setup();
 			//setup complete. search!
 			api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
 
