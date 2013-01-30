@@ -370,7 +370,8 @@ function agent(serviceUrl, options){
 						success(data);
 						if(final_api == true){
 							_loading(false);
-						  	$('#navbar').affix('refresh')
+						  	$('#navbar').affix('refresh');
+						  	$('#navbar').width($('body').width());
 						}
 				},
 	          error: function(jqXHR, textStatus, errorThrown) {
