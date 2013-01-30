@@ -148,8 +148,24 @@ function agent(serviceUrl, options){
 	//this function is called after we have successfully completed a transaction
 	this._cleanup = _cleanup;
 	function _cleanup(){
-		$('#alert_box').html('');
-		$('#loading').hide();
+		_loading(false);
+	}
+
+	this._loading = _loading;
+	function _loading(on){
+		if(on){
+			$('#search-icon').hide("fast", function () {
+				$('#loading').show();
+			  });	
+		}
+		else{
+			$('#alert_box').html('');
+			$('#loading').hide("fast", function () {
+				$('#search-icon').show();	
+			  });	
+
+		}
+
 	}
 
     //private functions
@@ -184,6 +200,7 @@ function agent(serviceUrl, options){
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(options.url);
 		$('#loading').show();
+		$('#search-icon').hide();
          $.ajax({
             url: options.url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
@@ -236,6 +253,7 @@ function agent(serviceUrl, options){
 		return source;
 	}
 
+	/* User function, for subscribing new users */
 	this.subscribe = subscribe;
 	function subscribe(is_doc) {
 		_send_request({
@@ -248,6 +266,7 @@ function agent(serviceUrl, options){
 		});
 	}
 
+	/* User function, identifies if the user exists or not. */
 	this.user_exists = user_exists;
 	function user_exists() {
 		_send_request({
@@ -260,6 +279,7 @@ function agent(serviceUrl, options){
 		});
 	}
 
+	/* Helper function if we want to grab images from our Python Bing backend. */
 	this.grab_images = grab_images;
 	function grab_images(query) {
 		_send_request({
@@ -272,8 +292,102 @@ function agent(serviceUrl, options){
 		});
 	}
 
-	this.parseSearchData = parseSearchData;
-	function parseSearchData(results){
+	/* search function called by the agent in the HTML5 widget
+
+		This function first renders the main template, then calls the api for general information, ontology,
+		drug/rx index info, and the published research database
+	*/
+	this.search = search;
+	function search(query){
+		//reset and setup tabbing
+		if(sessionStorage.getItem("searching") == "false"){
+			$('#loading').show();
+			sessionStorage.setItem("searching", "true");
+			var template =  Handlebars.compile($('#Basic').html());
+		    var html = template({});
+		    $('#content').html(html);
+		  	$('#myTab a').click(function (e) {
+				  e.preventDefault();
+				  $(this).tab('show');
+			});		
+			//setup complete. search!
+			api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
+
+			//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
+			api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
+			api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
+			//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
+			api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description', {}, true);
+			
+		}
+		//grab_images(query);
+		//get bing image results
+		//if assets didn't return general inforemation, use the medline.
+		//If that is unavailable inform the user
+	}
+
+ 	/* Main API function
+
+		This function accesses parses a number of options, then queries a search engine.
+		The reults are parsed by the success function which dumps resulting data
+		into the DOM through the this.success()
+
+		options:
+			index
+			type
+			query
+
+  	 */
+	this.api = api;
+	function api(options, field, kwargs, final_api) {
+		//not required
+		//we need to integrate kwargs into the options dict
+		if(kwargs == undefined){kwargs={}};
+		if (kwargs['from'] == undefined){
+			kwargs['from'] = 0;
+		}
+		if (kwargs['size'] == undefined){
+			kwargs['size'] = 10;
+		}
+		var url = 'http://70.189.71.82:9200/' + options['index'] + '/' + options['type'] + '/_search'
+		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
+		console.log(url);
+		var data = JSON.stringify({
+            query: {
+                multi_match: {
+		            "query" : options['query'],
+		            "fields" : ["title^5", "description"]
+                }
+            }
+        }); 
+		$.ajax({
+				dataType: "json",
+	            type: 'POST',
+				//contentType: 'application/json; charset=UTF-8',
+				crossDomain: true,
+				dataType: 'json',
+				url: url,
+				data: data,
+				success: function(data){
+						success(data);
+						if(final_api == true){
+							sessionStorage.setItem("searching", "false");
+							$('#loading').hide();
+						}
+				},
+	          error: function(jqXHR, textStatus, errorThrown) {
+	                var jso = jQuery.parseJSON(jqXHR.responseText);
+	                alert( '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
+	            }
+		});
+  	}
+
+	/* Upon success of the API we dump the corresponding data into the DOM
+		with handlebars.js template rendering helpers above.
+	*/
+	this.success = success;
+	function success(results) {
+  		//appends the search data
 		console.log(results);
 		var data = results.hits.hits;
 		if (data.length > 0) {
@@ -328,96 +442,15 @@ function agent(serviceUrl, options){
             //$('#res').removeClass('text-error').addClass('text-success').html(content);
         } else {
             //$('#res').removeClass('text-success').addClass('text-error').html('No results found.');
-    	}
-	}
-
-	this.search = search;
-	function search(query){
-		//reset and setup tabbing
-		if(sessionStorage.getItem("searching") == "false"){
-			$('#loading').show();
-			sessionStorage.setItem("searching", "true");
-			var template =  Handlebars.compile($('#Basic').html());
-		    var html = template({});
-		    $('#content').html(html);
-		  	$('#myTab a').click(function (e) {
-				  e.preventDefault();
-				  $(this).tab('show');
-			});		
-			//setup complete. search!
-			api({'index': 'genindex', 'type': 'gendoc', 'query': query}, 'description', {'size' : this.querySize});
-
-			//api({'index': 'aisle7index', 'type': 'asset', 'query': query}, 'description', {'size' : 10});
-			api({'index': 'nutraindex', 'type': 'node', 'query': query}, 'title', {'size' : 1});
-			api({'index': 'pubmedindex', 'type': 'pubmed', 'query': query}, 'description');
-			//api({'index': 'nutraindex', 'type': 'medline', 'query': query}, 'description', {'size' : 10});
-			api({'index': 'drugindex', 'type': 'rx', 'query': query}, 'description', {}, true);
-			
-		}
-		//grab_images(query);
-		//get bing image results
-		//if assets didn't return general inforemation, use the medline.
-		//If that is unavailable inform the user
-	}	
-
-	//callback function to put the search data into the page
-	this.success = success;
-	function success(data) {
-  		//record hits
-  		//appends the search data
-  		parseSearchData(data, options['type']);
-			//should convert each type into a priority queue and move them up appropriately
+    	}			//should convert each type into a priority queue and move them up appropriately
   		if(options['type'] == 'asset' && data.hits.hits == 0){
   			$('#sink_MedLine').appendTo('#sink_Asset');
   			$('#sink_MedLine').removeClass('tab-pane');
   			$('#href_MedLine').remove();
 		}
-
 	}
 
-	this.api = api;
-	function api(options, field, kwargs, final_api) {
-		//not required
-		if(kwargs == undefined){kwargs={}};
-		if (kwargs['from'] == undefined){
-			kwargs['from'] = 0;
-		}
-		if (kwargs['size'] == undefined){
-			kwargs['size'] = 10;
-		}
-		var url = 'http://70.189.71.82:9200/' + options['index'] + '/' + options['type'] + '/_search'
-		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
-		console.log(url);
-		var data = JSON.stringify({
-            query: {
-                multi_match: {
-		            "query" : options['query'],
-		            "fields" : ["title^5", "description"]
-                }
-            }
-        }); 
-		$.ajax({
-				dataType: "json",
-	            type: 'POST',
-				//contentType: 'application/json; charset=UTF-8',
-				crossDomain: true,
-				dataType: 'json',
-				url: url,
-				data: data,
-				success: function(data){
-						success(data);
-						if(final_api == true){
-							sessionStorage.setItem("searching", "false");
-							$('#loading').hide();
-						}
-				},
-	          error: function(jqXHR, textStatus, errorThrown) {
-	                var jso = jQuery.parseJSON(jqXHR.responseText);
-	                alert( '(' + jqXHR.status + ') ' + errorThrown + ' --<br />' + jso.error);
-	            }
-		});
-  	}
-
+  	/* sends a user rating to the Python RPC server */
 	this.rate = rate;
 	function rate(indexkey, rating) {
 		_send_request({
@@ -429,6 +462,4 @@ function agent(serviceUrl, options){
 			errorcall: _errorCallback
 		});
 	}
-
-
 }
