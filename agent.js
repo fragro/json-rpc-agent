@@ -154,16 +154,12 @@ function agent(serviceUrl, options){
 	this._loading = _loading;
 	function _loading(on){
 		if(on){
-			$('#search-icon').hide("fast", function () {
-				$('#loading').show();
-			  });
+			$('#search-icon').removeClass('icon-search').addClass('icon-spin icon-spinner');;
   			sessionStorage.setItem("searching", "true");	
 		}
 		else{
 			$('#alert_box').html('');
-			$('#loading').hide("fast", function () {
-				$('#search-icon').show();	
-			  });	
+			$('#search-icon').removeClass('icon-spin icon-spinner').addClass('icon-search');;
   			sessionStorage.setItem("searching", "false");	
 
 		}
