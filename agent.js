@@ -92,7 +92,19 @@ $('#more').click( function() {
 			window.curDiv = '#' + $(window.curDiv).next().attr('id');
 		});
 	}
-})
+});
+
+
+/* show document function
+	Using some Jquery helpers this lets us show
+	internal DIVs and hide everything else in the parent.
+	This is useful for showing pages of content initially hidden.
+*/
+$('.show-doc').click( function(){
+	var target = '#' + toString($(this).attr('id')) + '-target';
+	$(target).show().parentsUntil('#content').andSelf().siblings().hide();
+
+});
 
 function agent(serviceUrl, options){
     _url = serviceUrl;
