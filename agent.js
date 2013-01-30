@@ -370,6 +370,9 @@ function agent(serviceUrl, options){
 						success(data);
 						if(final_api == true){
 							_loading(false);
+							$('[data-spy="affix"]').each(function () {
+							  $(this).affix('refresh')
+							});
 						}
 				},
 	          error: function(jqXHR, textStatus, errorThrown) {
@@ -445,9 +448,6 @@ function agent(serviceUrl, options){
   			$('#sink_MedLine').removeClass('tab-pane');
   			$('#href_MedLine').remove();
 		}
-		$('[data-spy="affix"]').each(function () {
-		  $(this).affix('refresh')
-		});
 	}
 
   	/* sends a user rating to the Python RPC server */
