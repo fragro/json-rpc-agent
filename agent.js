@@ -16,17 +16,6 @@ function register(is_doctor){
 	$("#user_check").fadeOut("fast");
 }
 
-function stars(div, id){
-	$(div).raty({
-	  path: '',
-	  starOn: 'https://raw.github.com/wbotelhos/raty/master/img/star-on.png',
-	  starOff: 'https://raw.github.com/wbotelhos/raty/master/img/star-off.png',
-	  click: function() {
-	    agent.rate(id, $(div).raty('score'))
-	  }
-	});
-}
-
 function activate(id){
 	  // cache container
 	$('#filterholder' + id).toggleClass('hidden');
@@ -181,6 +170,19 @@ function agent(serviceUrl, options){
 		});
 	}
 
+	/* renders the rating widget for an object on demand */
+	this._stars = _stars;
+	function _stars(div, id){
+		_render('#rating', {'_id': id}, div);
+		/*$(div).raty({
+		  path: '',
+		  starOn: 'https://raw.github.com/wbotelhos/raty/master/img/star-on.png',
+		  starOff: 'https://raw.github.com/wbotelhos/raty/master/img/star-off.png',
+		  click: function() {
+		    agent.rate(id, $(div).raty('score'))
+		  }
+		});*/
+	}
 
     //private functions
     //successcallback for reccomendation
