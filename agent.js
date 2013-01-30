@@ -156,13 +156,15 @@ function agent(serviceUrl, options){
 		if(on){
 			$('#search-icon').hide("fast", function () {
 				$('#loading').show();
-			  });	
+			  });
+  			sessionStorage.setItem("searching", "true");	
 		}
 		else{
 			$('#alert_box').html('');
 			$('#loading').hide("fast", function () {
 				$('#search-icon').show();	
 			  });	
+  			sessionStorage.setItem("searching", "false");	
 
 		}
 
@@ -181,7 +183,8 @@ function agent(serviceUrl, options){
     			window.retries += 1;
     		}
     		else
-{    			_warning('Uh Oh', 'It looks like the service is down');
+			{    			
+				_warning('Uh Oh', 'It looks like the service is down');
     		}
     	}
     	else{
@@ -199,8 +202,6 @@ function agent(serviceUrl, options){
     function _send_request(options) {
     	var randomID=Math.floor(Math.random()*11100)
     	console.log(options.url);
-		$('#loading').show();
-		$('#search-icon').hide();
          $.ajax({
             url: options.url, 
             data: JSON.stringify ({jsonrpc:'2.0', method:options.method, params:[options.params], id:randomID} ),  // id is needed !!
@@ -301,8 +302,7 @@ function agent(serviceUrl, options){
 	function search(query){
 		//reset and setup tabbing
 		if(sessionStorage.getItem("searching") == "false"){
-			$('#loading').show();
-			sessionStorage.setItem("searching", "true");
+			_loading(true);
 			var template =  Handlebars.compile($('#Basic').html());
 		    var html = template({});
 		    $('#content').html(html);
@@ -371,8 +371,7 @@ function agent(serviceUrl, options){
 				success: function(data){
 						success(data);
 						if(final_api == true){
-							sessionStorage.setItem("searching", "false");
-							$('#loading').hide();
+							_loading(false);
 						}
 				},
 	          error: function(jqXHR, textStatus, errorThrown) {
