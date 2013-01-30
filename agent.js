@@ -175,7 +175,7 @@ function agent(serviceUrl, options){
 		var template =  Handlebars.compile($('#DataTypes').html());
 	    var html = template({});
 	    $('#type-of-data').html(html);
-	  	$('#myTab a').click(function (e) {
+	  	$('#type-of-data a').click(function (e) {
 			  e.preventDefault();
 			  $(this).tab('show');
 		});
