@@ -370,9 +370,7 @@ function agent(serviceUrl, options){
 						success(data);
 						if(final_api == true){
 							_loading(false);
-							$('[data-spy="affix"]').each(function () {
-							  $(this).affix('refresh')
-							});
+						  	$('#navbar').affix('refresh')
 						}
 				},
 	          error: function(jqXHR, textStatus, errorThrown) {
