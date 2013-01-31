@@ -364,7 +364,6 @@ function agent(serviceUrl, options){
 		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
 		//now render the next page for our infinite scrolling
-		var nexturl = 
 		var data = JSON.stringify({
             query: {
                 match: {
