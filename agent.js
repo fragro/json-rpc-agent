@@ -4,6 +4,9 @@
 * access that protocol. The agent subscribes users with userID and profile information, and the server
 * generates recommendations on the fly as the user requests more. Optionally the user can interact with the
 * agent, sending back ratings or other types of feedback which in turn drives a collaborative filtering process.
+
+Requirements:
+
 */
 window.hits = {};
 window.urlCount = 0;
@@ -360,14 +363,17 @@ function agent(serviceUrl, options){
 		var url = 'http://70.189.71.82:9200/' + options['index'] + '/' + options['type'] + '/_search'
 		//url = url + '?q=' + field + ':' + options['query'] + '&size=' + kwargs['size'] + '&from=' + kwargs['from']
 		console.log(url);
+		//now render the next page for our infinite scrolling
+		var nexturl = 
 		var data = JSON.stringify({
             query: {
-                multi_match: {
+                match: {
 		            "query" : options['query'],
-		            "fields" : ["title^5", "description"]
+		            "fields" : ["title^2", "description"]
                 }
             }
-        }); 
+        });
+        console.log(encodeURIComponent(data));
 		$.ajax({
 				dataType: "json",
 	            type: 'POST',
@@ -397,6 +403,7 @@ function agent(serviceUrl, options){
   		//appends the search data
 		console.log(results);
 		var data = results.hits.hits;
+		init_infiniscroll(main, nav, next, item);
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
