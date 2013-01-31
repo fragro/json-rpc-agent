@@ -366,7 +366,7 @@ function agent(serviceUrl, options){
 		//now render the next page for our infinite scrolling
 		var data = JSON.stringify({
             query: {
-                match: {
+                multi_match: {
 		            "query" : options['query'],
 		            "fields" : ["title^2", "description"]
                 }
