@@ -402,7 +402,7 @@ function agent(serviceUrl, options){
   		//appends the search data
 		console.log(results);
 		var data = results.hits.hits;
-		init_infiniscroll(main, nav, next, item);
+		//init_infiniscroll(main, nav, next, item);
 		if (data.length > 0) {
             for (var i = 0; i < data.length; i++) {
             	console.log(data[i]);
